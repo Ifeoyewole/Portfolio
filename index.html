@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oyewole Victor | Frontend Developer & Data Analyst</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="brand">OV.</a>
+            <div class="nav-container">
+                <ul id="nav-links" class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <button class="nav-toggle" aria-controls="mobile-sidebar" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <h1>
+                    <span class="greeting">Hello, I'm Victor.</span>
+                    <span class="title">A Frontend Developer & Data Analyst</span>
+                </h1>
+                <p class="hero-text">
+                    I create user-focused web experiences and transform data into actionable insights.
+                    <span class="desktop-only" id="typewriter" aria-live="polite"></span>
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Let's Connect</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- We'll add a professional illustration or your photo here -->
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>Hi, I'm a frontend developer passionate about creating beautiful, functional websites and web applications. I also specialize in data analysis and have hands-on experience with Power BI to transform raw data into actionable insights.</p>
+            </div>
+        </section>
+
+        <section id="data-analysis">
+            <div class="container">
+                    <h2>Data Analysis & Power BI</h2>
+                    <p>As a data analyst, I have experience using Power BI to visualize and analyze data, create dashboards, and deliver insights.</p>
+                    <ul>
+                            <li>Power BI Dashboard Creation</li>
+                            <li>Data Visualization and Reporting</li>
+                            <li>Data Transformation and ETL Processes</li>
+                    </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <div class="container">
+                    <h2>My Projects</h2>
+
+                    <div class="projects-gallery">
+                            <article class="project-card">
+                                    <div class="project-thumb" style="background-image: url('assets/project1.jpg'); background-size:cover; background-position:center;"></div>
+                                    <h3>Project 1 — Portfolio UI</h3>
+                                    <p>Responsive portfolio UI with animations and accessibility improvements.</p>
+                                    <a class="btn btn-ghost" href="#projects" aria-label="View project 1">View</a>
+                            </article>
+
+                            <article class="project-card">
+                                    <div class="project-thumb" style="background-image: url('assets/project2.jpg'); background-size:cover; background-position:center;"></div>
+                                    <h3>Project 2 — Data Dashboard</h3>
+                                    <p>Power BI style dashboard mockup and interactive visualizations.</p>
+                                    <a class="btn btn-ghost" href="#projects" aria-label="View project 2">View</a>
+                            </article>
+
+                            <article class="project-card">
+                                    <div class="project-thumb" style="background-image: url('assets/project3.jpg'); background-size:cover; background-position:center;"></div>
+                                    <h3>Project 3 — Demo App</h3>
+                                    <p>Small full-stack demo with a serverless contact endpoint.</p>
+                                    <a class="btn btn-ghost" href="#projects" aria-label="View project 3">View</a>
+                            </article>
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                    <h2>Contact Me</h2>
+
+                    <p class="contact-intro">Prefer a quick message? Use one of the channels below or send an email.</p>
+
+                    <div class="contact-actions">
+                            <a class="contact-btn" href="mailto:oyewolevictorifeoluwa@gmail.com" aria-label="Email">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                    <span class="btn-label">Email</span>
+                            </a>
+
+                            <a class="contact-btn" href="https://www.linkedin.com/in/oyewole-victor-a9323b317" target="_blank" rel="noopener" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                    <span class="btn-label">LinkedIn</span>
+                            </a>
+
+                            <a class="contact-btn" href="https://x.com/OyewoleIfeolu17" target="_blank" rel="noopener" aria-label="X">
+                                    <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                                    <span class="btn-label">X</span>
+                            </a>
+
+                            <a class="contact-btn" href="https://wa.me/2348062690609" target="_blank" rel="noopener" aria-label="WhatsApp">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                    <span class="btn-label">WhatsApp</span>
+                            </a>
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+                <p>&copy; 2025 Oyewole Victor Ifeoluwa</p>
+        </div>
+    </footer>
+
+    <script src="main.js" defer></script>
+
+</body>
+</html>
+
+
