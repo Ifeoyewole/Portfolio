@@ -1,7 +1,6 @@
 // main.js — site-wide JavaScript
 
 document.addEventListener('DOMContentLoaded', function () {
-	// Smooth scrolling for in-page navigation with nav offset
 	const navLinks = document.querySelectorAll('nav a');
 	const OFFSET = 70;
 
@@ -109,7 +108,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		const phrases = [
 			'Building interactive interfaces.',
 			'Visualizing data with Power BI.',
-			'Designing delightful user experiences.'
+			'Designing delightful user experiences.',
+			'Creating responsive web designs.',
+			'Crafting clean, maintainable code.',
+			'Bridging design and development.',
+			'Exploring new web technologies.'
 		];
 
 		let current = 0;
@@ -144,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
-		// Start on initial load, and continue looping
 		setTimeout(tick, 700);
 	}
 
