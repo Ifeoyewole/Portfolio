@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor – Web3 Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #050a0e;
+    --card: #0b1520;
+    --border: #1a2f45;
+    --green: #00ffa3;
+    --cyan: #00d4ff;
+    --purple: #9945ff;
+    --text: #e0eaf5;
+    --muted: #607a90;
+    --tag-bg: #0f2035;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,163,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,163,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── PROFILE CARD ── */
+  .profile-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--cyan), var(--purple));
+  }
+
+  .profile-card::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,255,163,0.06), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .profile-top {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #050a0e;
+    flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(0,255,163,0.25);
+  }
+
+  .profile-name {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .profile-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,255,163,0.08);
+    border: 1px solid rgba(0,255,163,0.2);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    margin-top: 0.5rem;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #b0c8de;
+    margin-bottom: 1.8rem;
+    padding: 1.2rem;
+    background: rgba(255,255,255,0.02);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--tag-bg);
+    color: var(--cyan);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--cyan);
+    background: rgba(0,212,255,0.08);
+    box-shadow: 0 0 10px rgba(0,212,255,0.1);
+  }
+
+  .skill-tag.solana {
+    color: var(--green);
+    border-color: rgba(0,255,163,0.3);
+    background: rgba(0,255,163,0.06);
+  }
+
+  .skill-tag.solana:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 10px rgba(0,255,163,0.15);
+  }
+
+  /* ── DM TEMPLATES ── */
+  .dm-section {
+    margin-top: 1.8rem;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: rgba(0,255,163,0.06);
+  }
+
+  .dm-box {
+    display: none;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: #b0c8de;
+    position: relative;
+  }
+
+  .dm-box.active { display: block; animation: fadeUp 0.3s ease both; }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.8rem; right: 0.8rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: var(--tag-bg);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover { color: var(--green); border-color: var(--green); }
+  .copy-btn.copied { color: var(--green); border-color: var(--green); }
+
+  .highlight { color: var(--cyan); }
+  .highlight-green { color: var(--green); }
+
+  /* ── PROJECT FINDER ── */
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-title span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(0,255,163,0.3);
+    border-radius: 4px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 580px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .profile-top { flex-direction: column; text-align: center; }
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .project-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.08);
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-name {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .project-type {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(153,69,255,0.12);
+    color: #c084ff;
+    border: 1px solid rgba(153,69,255,0.2);
+    white-space: nowrap;
+  }
+
+  .project-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .project-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    color: var(--cyan);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .project-link:hover {
+    border-color: var(--cyan);
+    background: rgba(0,212,255,0.07);
+  }
+
+  .project-link.discord { color: #7289da; border-color: rgba(114,137,218,0.3); }
+  .project-link.discord:hover { border-color: #7289da; background: rgba(114,137,218,0.07); }
+
+  .fit-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--green);
+    margin-top: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  /* ── JOB BOARDS ── */
+  .boards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 580px) { .boards-grid { grid-template-columns: 1fr 1fr; } }
+
+  .board-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .board-card:hover {
+    border-color: var(--purple);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(153,69,255,0.1);
+  }
+
+  .board-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .board-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ══ PROFILE CARD ══ -->
+  <div class="profile-card">
+    <div class="profile-top">
+      <div class="avatar">V</div>
+      <div>
+        <div class="profile-name">Victor</div>
+        <div class="profile-title">// Web3 Full-Stack Developer</div>
+        <div class="status-badge"><span class="status-dot"></span>Open to Opportunities</div>
+      </div>
+    </div>
+
+    <div class="bio">
+      Full-stack developer specializing in Solana on-chain programs and modern web frontends. I build end-to-end decentralized apps — from Anchor smart contracts to polished React/Next.js interfaces — with clean TypeScript throughout. Ready to ship fast in early-stage Web3 teams.
+    </div>
+
+    <div class="section-label">// Core Skills</div>
+    <div class="skills-grid">
+      <span class="skill-tag solana">⬡ Solana</span>
+      <span class="skill-tag solana">⬡ Anchor</span>
+      <span class="skill-tag solana">⬡ @solana/web3.js</span>
+      <span class="skill-tag">TypeScript</span>
+      <span class="skill-tag">React</span>
+      <span class="skill-tag">Next.js</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">Node.js</span>
+      <span class="skill-tag">Smart Contracts</span>
+      <span class="skill-tag">DeFi</span>
+      <span class="skill-tag">NFT Tooling</span>
+      <span class="skill-tag">REST APIs</span>
+    </div>
+
+    <!-- DM Templates -->
+    <div class="dm-section">
+      <div class="section-label">// Ready-to-Send DM Templates</div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showDM('twitter')">Twitter / X</button>
+        <button class="tab-btn" onclick="showDM('discord')">Discord</button>
+        <button class="tab-btn" onclick="showDM('linkedin')">LinkedIn</button>
+        <button class="tab-btn" onclick="showDM('cold')">Cold Outreach</button>
+      </div>
+
+      <div class="dm-box active" id="dm-twitter">
+        <button class="copy-btn" onclick="copyDM('dm-twitter')">Copy</button>
+        Hey <span class="highlight">[Name]</span> 👋 I've been following <span class="highlight">[Project]</span> — love what you're building.<br><br>
+        I'm a full-stack dev with Solana experience. I build on-chain programs with Anchor and ship clean React/Next.js frontends with TypeScript.<br><br>
+        Would love to contribute to <span class="highlight-green">[specific feature/area]</span>. Open to a quick chat?
+      </div>
+
+      <div class="dm-box" id="dm-discord">
+        <button class="copy-btn" onclick="copyDM('dm-discord')">Copy</button>
+        Hey <span class="highlight">[Name]</span>! I've been active in the server and really excited about what <span class="highlight">[Project]</span> is building.<br><br>
+        I'm a Solana full-stack dev — Anchor programs, React/Next.js + TypeScript frontends, end-to-end. I noticed you're working on <span class="highlight-green">[feature]</span> and think I could add real value there.<br><br>
+        Is the team open to contributors or is there a hiring process I should follow?
+      </div>
+
+      <div class="dm-box" id="dm-linkedin">
+        <button class="copy-btn" onclick="copyDM('dm-linkedin')">Copy</button>
+        Hi <span class="highlight">[Name]</span>,<br><br>
+        I came across <span class="highlight">[Project]</span> and was impressed by your approach to <span class="highlight-green">[specific thing]</span>.<br><br>
+        I'm a full-stack developer with hands-on Solana experience — building on-chain programs, DeFi tooling, and consumer-facing dApps with React/Next.js and TypeScript. I'm actively looking to join an early-stage Web3 team where I can make a real impact.<br><br>
+        Would love to connect and explore if there's a fit.
+      </div>
+
+      <div class="dm-box" id="dm-cold">
+        <button class="copy-btn" onclick="copyDM('dm-cold')">Copy</button>
+        Subject: Solana Full-Stack Dev — Interested in <span class="highlight">[Project]</span><br><br>
+        Hey <span class="highlight">[Name]</span>,<br><br>
+        I've been building on Solana for a while — smart contracts via Anchor, frontends in React/Next.js with TypeScript, and the full stack in between. I came across <span class="highlight">[Project]</span> and the problem you're solving around <span class="highlight-green">[specific area]</span> genuinely excites me.<br><br>
+        I'd love to jump in and contribute. Happy to do a small test task or chat async — whatever works for you.<br><br>
+        — Victor
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ ACTIVE PROJECTS ══ -->
+  <div class="section-title delay-1" style="animation: fadeUp 0.5s ease both;">
+    Active Solana Projects to Target <span>2026</span>
+  </div>
+  <p style="font-size:0.82rem; color: var(--muted); margin-bottom: 0.5rem;">These projects are actively building on Solana and are great targets for your outreach:</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card delay-1">
+      <div class="project-header">
+        <div class="project-name">Jupiter</div>
+        <span class="project-type">DEX Aggregator</span>
+      </div>
+      <div class="project-desc">Solana's #1 swap aggregator. Actively expanding their ecosystem with new DeFi products and integrations.</div>
+      <div class="project-links">
+        <a href="https://jup.ag" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/jup" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://twitter.com/JupiterExchange" target="_blank" class="project-link">Twitter</a>
+      </div>
+      <div class="fit-badge">✓ Needs: Full-stack, TypeScript, React</div>
+    </div>
+
+    <div class="project-card delay-2">
+      <div class="project-header">
+        <div class="project-name">Phantom</div>
+        <span class="project-type">Wallet</span>
+      </div>
+      <div class="project-desc">Leading Solana wallet expanding multi-chain. Actively hiring frontend engineers with Web3 experience.</div>
+      <div class="project-links">
+        <a href="https://phantom.app" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/phantom" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://twitter.com/phantom" target="_blank" class="project-link">Twitter</a>
+      </div>
+      <div class="fit-badge">✓ Needs: React, TypeScript, Web3.js</div>
+    </div>
+
+    <div class="project-card delay-2">
+      <div class="project-header">
+        <div class="project-name">Jito</div>
+        <span class="project-type">Liquid Staking</span>
+      </div>
+      <div class="project-desc">MEV infrastructure and liquid staking on Solana. Strong DAO governance and growing DeFi integrations.</div>
+      <div class="project-links">
+        <a href="https://jito.network" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/jito" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://twitter.com/jito_sol" target="_blank" class="project-link">Twitter</a>
+      </div>
+      <div class="fit-badge">✓ Needs: Anchor, Full-stack</div>
+    </div>
+
+    <div class="project-card delay-3">
+      <div class="project-header">
+        <div class="project-name">Drift Protocol</div>
+        <span class="project-type">Perps / DeFi</span>
+      </div>
+      <div class="project-desc">Solana-native derivatives platform for perps, spot, and lending. Fast-growing team always looking for builders.</div>
+      <div class="project-links">
+        <a href="https://drift.trade" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/drift" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://twitter.com/DriftProtocol" target="_blank" class="project-link">Twitter</a>
+      </div>
+      <div class="fit-badge">✓ Needs: Solana, React, TypeScript</div>
+    </div>
+
+    <div class="project-card delay-3">
+      <div class="project-header">
+        <div class="project-name">Kamino Finance</div>
+        <span class="project-type">DeFi / Lending</span>
+      </div>
+      <div class="project-desc">Automated liquidity and lending on Solana. Expanding markets and risk tooling with tight wallet integrations.</div>
+      <div class="project-links">
+        <a href="https://kamino.finance" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/kamino" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://twitter.com/KaminoFinance" target="_blank" class="project-link">Twitter</a>
+      </div>
+      <div class="fit-badge">✓ Needs: Anchor, Next.js, DeFi</div>
+    </div>
+
+    <div class="project-card delay-4">
+      <div class="project-header">
+        <div class="project-name">Metaplex</div>
+        <span class="project-type">NFT Infrastructure</span>
+      </div>
+      <div class="project-desc">The standard for NFT creation on Solana. Open-source and always welcoming contributors to their protocol.</div>
+      <div class="project-links">
+        <a href="https://metaplex.com" target="_blank" class="project-link">↗ Website</a>
+        <a href="https://discord.gg/metaplex" target="_blank" class="project-link discord">Discord</a>
+        <a href="https://github.com/metaplex-foundation" target="_blank" class="project-link">GitHub</a>
+      </div>
+      <div class="fit-badge">✓ Needs: Rust, TypeScript, Open Source</div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ JOB BOARDS ══ -->
+  <div class="section-title" style="animation: fadeUp 0.5s ease both; animation-delay:0.3s;">
+    Best Job Boards for You <span>Solana</span>
+  </div>
+
+  <div class="boards-grid">
+    <a href="https://superteam.fun" target="_blank" class="board-card">
+      <div class="board-name">Superteam</div>
+      <div class="board-desc">Solana-only. Bounties, gigs & full-time. Best for Solana devs.</div>
+    </a>
+    <a href="https://web3.career/solana-jobs" target="_blank" class="board-card">
+      <div class="board-name">web3.career</div>
+      <div class="board-desc">1,900+ remote Solana jobs listed right now.</div>
+    </a>
+    <a href="https://cryptojobslist.com/solana" target="_blank" class="board-card">
+      <div class="board-name">CryptoJobsList</div>
+      <div class="board-desc">Active Solana listings with salary ranges shown.</div>
+    </a>
+    <a href="https://colosseum.org" target="_blank" class="board-card">
+      <div class="board-name">Colosseum</div>
+      <div class="board-desc">Solana hackathons. Meet co-founders & early teams.</div>
+    </a>
+    <a href="https://wellfound.com/role/r/solana-developer" target="_blank" class="board-card">
+      <div class="board-name">Wellfound</div>
+      <div class="board-desc">Startup-focused. Many early-stage Web3 teams.</div>
+    </a>
+    <a href="https://solana.com/developers" target="_blank" class="board-card">
+      <div class="board-name">Solana Foundation</div>
+      <div class="board-desc">Grants & developer programs from the foundation itself.</div>
+    </a>
+  </div>
+
+  <p style="text-align:center; font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--muted); margin-top:2rem; padding-bottom:1rem;">
+    Built for Victor · Web3 Full-Stack Developer · 2026
+  </p>
+
+</div>
+
+<script>
+  function showDM(id) {
+    document.querySelectorAll('.dm-box').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('dm-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function copyDM(id) {
+    const el = document.getElementById(id);
+    const text = el.innerText.replace('Copy\n', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = el.querySelector('.copy-btn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

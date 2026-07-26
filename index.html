@@ -1,218 +1,479 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Oyewole Victor | Frontend Developer & Data Analyst</title>
-    <meta name="description" content="Junior Frontend & Full-Stack Developer and Data Analyst specializing in React, Next.js, and Power BI. Building beautiful web experiences and turning data into insights.">
-    <link rel="stylesheet" href="./style.css">
+    <meta name="description" content="Junior Frontend & Full-Stack Developer and Data Analyst specializing in React, Next.js, and Power BI. Building beautiful, responsive web experiences and turning complex data into actionable business insights.">
+    <!-- Favicon / Theme color -->
+    <meta name="theme-color" content="#0B0F19">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Animated Background Canvas / Orbs -->
+    <div class="bg-effects" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="container nav-inner">
-            <a href="#" class="brand">OV.</a>
+            <a href="#" class="brand">
+                <span class="brand-text">OV</span><span class="brand-dot">.</span>
+            </a>
             <div class="nav-container">
                 <ul id="nav-links" class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#data-analysis">Data</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about" class="nav-item">About</a></li>
+                    <li><a href="#skills" class="nav-item">Skills</a></li>
+                    <li><a href="#projects" class="nav-item">Projects</a></li>
+                    <li><a href="#data-analysis" class="nav-item">Data Analytics</a></li>
+                    <li><a href="#contact" class="nav-item">Contact</a></li>
                 </ul>
-                <button class="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
             </div>
-            <button class="nav-toggle" aria-controls="mobile-sidebar" aria-expanded="false">
-                <i class="fas fa-bars"></i>
+            <button class="nav-toggle" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars-staggered"></i>
             </button>
         </div>
     </nav>
 
-    <header class="hero">
+    <!-- Mobile Navigation Sidebar -->
+    <div class="mobile-sidebar" id="mobile-sidebar" aria-hidden="true">
+        <div class="sidebar-header">
+            <span class="brand">OV<span class="brand-dot">.</span></span>
+            <button class="sidebar-close" aria-label="Close navigation menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li><a href="#projects">Web Projects</a></li>
+            <li><a href="#data-analysis">Data Analytics</a></li>
+            <li><a href="#contact">Get In Touch</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>Ready to build together</p>
+            <div class="sidebar-socials">
+                <a href="mailto:oyewolevictorifeoluwa@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/oyewole-victor-a9323b317" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://wa.me/2348062690609" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
         <div class="container hero-inner">
             <div class="hero-content">
-                <h1>
-                    <span class="greeting">Hi, I'm Victor 👋</span>
-                    <span class="title">Frontend Developer & Data Analyst</span>
+                <div class="hero-badge reveal">
+                    <span class="badge-pulse"></span>
+                    <span>Available for Frontend &amp; Data Roles</span>
+                </div>
+                <h1 class="hero-title reveal">
+                    <span class="greeting">Hi, I'm Victor <span class="wave">👋</span></span>
+                    <span class="title-gradient">Crafting Web Experiences &amp; Data Insights</span>
                 </h1>
-                <p class="hero-text">
-                    I build polished, responsive web applications and transform raw data into clear, actionable insights.
-                    <span class="desktop-only" id="typewriter" aria-live="polite"></span>
+                <p class="hero-text reveal">
+                    I build responsive, high-performance web applications and transform complex raw datasets into executive Power BI dashboards that drive intelligent business decisions.
                 </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Let's Connect</a>
+                <div class="typewriter-container reveal">
+                    <span class="code-prefix">&gt; </span><span id="typewriter" aria-live="polite">Building full-stack web solutions...</span><span class="cursor">&nbsp;</span>
+                </div>
+                <div class="hero-cta reveal">
+                    <a href="#projects" class="btn btn-primary btn-glow">
+                        <span>Explore My Work</span>
+                        <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <span>Let's Connect</span>
+                        <i class="fas fa-paper-plane btn-icon"></i>
+                    </a>
+                    <button class="btn btn-ghost copy-email-btn" data-email="oyewolevictorifeoluwa@gmail.com" title="Copy Email Address">
+                        <i class="far fa-copy"></i>
+                        <span>Copy Email</span>
+                    </button>
                 </div>
             </div>
-            <div class="hero-visual">
-                <img src="WhatsApp Image 2025-12-17 at 22.36.53_06b5bb0d.jpg" alt="Oyewole Victor" class="hero-image" loading="lazy">
+            
+            <div class="hero-visual reveal">
+                <div class="hero-visual-wrapper">
+                    <div class="profile-glow-ring"></div>
+                    <div class="profile-card">
+                        <img src="WhatsApp Image 2025-12-17 at 22.36.53_06b5bb0d.jpg" alt="Oyewole Victor" class="hero-image" loading="lazy">
+                        <div class="profile-overlay">
+                            <span class="overlay-tag"><i class="fas fa-circle text-success"></i> Open to Work</span>
+                        </div>
+                    </div>
+                    <!-- Orbiting Floating Badges -->
+                    <div class="floating-badge badge-react animate-float-slow">
+                        <i class="fab fa-react"></i> <span>React &amp; Next.js</span>
+                    </div>
+                    <div class="floating-badge badge-powerbi animate-float-medium">
+                        <i class="fas fa-chart-bar"></i> <span>Power BI Expert</span>
+                    </div>
+                    <div class="floating-badge badge-node animate-float-fast">
+                        <i class="fab fa-node-js"></i> <span>Node &amp; Express</span>
+                    </div>
+                    <div class="floating-badge badge-sql animate-float-slow">
+                        <i class="fas fa-database"></i> <span>SQL &amp; DAX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated Statistical Counters Row -->
+        <div class="container">
+            <div class="stats-grid reveal">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon"><i class="fas fa-code-branch"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value"><span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span></div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value"><span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span></div>
+                        <div class="stat-label">Dedication &amp; Quality</div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- About -->
-        <section id="about" class="section reveal">
+        <!-- About Me Section — Bento Grid Layout -->
+        <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <p>I'm a junior full-stack developer and data analyst with a passion for building clean, user-focused web applications and uncovering stories hidden in data. I love working across the entire stack — from crafting pixel-perfect UIs with React and Next.js to building robust APIs with Node.js and Express.</p>
-                    <p>On the data side, I create interactive Power BI dashboards that help teams make smarter decisions. I'm always learning, always building, and always looking for the next challenge.</p>
-                    <div class="about-highlights">
-                        <div class="highlight-card">
-                            <i class="fas fa-code"></i>
-                            <h3>Frontend Dev</h3>
-                            <p>React, Next.js, responsive design & modern CSS</p>
+                <div class="section-header reveal">
+                    <span class="section-subtitle">Get To Know Me</span>
+                    <h2 class="section-title">Architecting UIs &amp; Uncovering Data Stories</h2>
+                    <div class="title-underline"></div>
+                </div>
+
+                <div class="bento-grid reveal">
+                    <!-- Bento Item 1: Main Story -->
+                    <div class="bento-card bento-main glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="bento-icon"><i class="fas fa-terminal"></i></div>
+                        <h3>The Developer &amp; Analyst Synergy</h3>
+                        <p>I am a junior full-stack developer and data analyst driven by a dual passion: building responsive, user-centric web applications and uncovering impactful insights hidden within complex datasets.</p>
+                        <p>Whether I am crafting pixel-perfect interfaces with <strong>React and Next.js</strong>, architecting robust backend APIs with <strong>Node.js and Express</strong>, or modeling enterprise data in <strong>Power BI with DAX and SQL</strong>, I approach every project with clean code, analytical rigor, and an eye for state-of-the-art design.</p>
+                        <div class="bento-tags">
+                            <span class="code-tag">#FullStackDev</span>
+                            <span class="code-tag">#DataStorytelling</span>
+                            <span class="code-tag">#UIUXDesign</span>
+                            <span class="code-tag">#ProblemSolver</span>
                         </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-server"></i>
-                            <h3>Full-Stack</h3>
-                            <p>Node.js, Express, PHP, REST APIs & databases</p>
-                        </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-chart-line"></i>
-                            <h3>Data Analyst</h3>
-                            <p>Power BI, DAX, SQL & data storytelling</p>
-                        </div>
+                    </div>
+
+                    <!-- Bento Item 2: Frontend Engineering -->
+                    <div class="bento-card bento-feat glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="bento-icon accent-blue"><i class="fas fa-layer-group"></i></div>
+                        <h3>Frontend Engineering</h3>
+                        <p>Crafting sleek, accessible, and ultra-responsive interfaces using modern React, Next.js, TypeScript, and CSS3 animations.</p>
+                        <ul class="bento-bullet-list">
+                            <li><i class="fas fa-check-circle"></i> Component-driven React architecture</li>
+                            <li><i class="fas fa-check-circle"></i> Glassmorphism &amp; modern CSS aesthetics</li>
+                            <li><i class="fas fa-check-circle"></i> Mobile-first &amp; responsive layouts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Bento Item 3: Backend & Systems -->
+                    <div class="bento-card bento-feat glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="bento-icon accent-teal"><i class="fas fa-server"></i></div>
+                        <h3>Backend &amp; APIs</h3>
+                        <p>Developing scalable server logic, RESTful APIs, and database schemas with Node.js, Express, PHP, and MySQL.</p>
+                        <ul class="bento-bullet-list">
+                            <li><i class="fas fa-check-circle"></i> RESTful API development</li>
+                            <li><i class="fas fa-check-circle"></i> MySQL &amp; relational databases</li>
+                            <li><i class="fas fa-check-circle"></i> Authentication &amp; data validation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Bento Item 4: Data Analytics & BI -->
+                    <div class="bento-card bento-feat glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="bento-icon accent-yellow"><i class="fas fa-chart-pie"></i></div>
+                        <h3>Data Analytics &amp; BI</h3>
+                        <p>Transforming messy data into executive dashboards using Power BI, Power Query, advanced DAX measures, and SQL.</p>
+                        <ul class="bento-bullet-list">
+                            <li><i class="fas fa-check-circle"></i> Advanced DAX &amp; data modeling</li>
+                            <li><i class="fas fa-check-circle"></i> Interactive Power BI dashboards</li>
+                            <li><i class="fas fa-check-circle"></i> Actionable KPI storytelling</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills -->
-        <section id="skills" class="section reveal">
+        <!-- Technical Skills — Interactive Filter Tabs -->
+        <section id="skills" class="section bg-alt">
             <div class="container">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="tech-stack">
-                    <div class="tech-item">
-                        <i class="fab fa-html5 html"></i>
-                        <span>HTML5</span>
+                <div class="section-header reveal">
+                    <span class="section-subtitle">My Arsenal</span>
+                    <h2 class="section-title">Technical Proficiency &amp; Tools</h2>
+                    <div class="title-underline"></div>
+                </div>
+
+                <!-- Interactive Filter Buttons -->
+                <div class="skills-filter reveal">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-th-large"></i> All Skills
+                    </button>
+                    <button class="filter-btn" data-filter="frontend">
+                        <i class="fas fa-desktop"></i> Frontend
+                    </button>
+                    <button class="filter-btn" data-filter="backend">
+                        <i class="fas fa-server"></i> Backend &amp; DB
+                    </button>
+                    <button class="filter-btn" data-filter="data">
+                        <i class="fas fa-chart-bar"></i> Data &amp; BI
+                    </button>
+                    <button class="filter-btn" data-filter="tools">
+                        <i class="fas fa-tools"></i> Tools &amp; Workflow
+                    </button>
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="tech-stack reveal" id="tech-stack-grid">
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fab fa-html5 html"></i></div>
+                        <span class="tech-name">HTML5</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-css3-alt css"></i>
-                        <span>CSS3</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fab fa-css3-alt css"></i></div>
+                        <span class="tech-name">CSS3</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-js-square js"></i>
-                        <span>JavaScript</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fab fa-js-square js"></i></div>
+                        <span class="tech-name">JavaScript</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-react react"></i>
-                        <span>React</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fab fa-react react"></i></div>
+                        <span class="tech-name">React</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-layer-group next"></i>
-                        <span>Next.js</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fas fa-layer-group next"></i></div>
+                        <span class="tech-name">Next.js</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-code typescript"></i>
-                        <span>TypeScript</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fas fa-code typescript"></i></div>
+                        <span class="tech-name">TypeScript</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-wind tailwind"></i>
-                        <span>Tailwind CSS</span>
+                    <div class="tech-item glass-card" data-category="frontend">
+                        <div class="tech-icon"><i class="fas fa-wind tailwind"></i></div>
+                        <span class="tech-name">Tailwind CSS</span>
+                        <span class="tech-type">Frontend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-node-js node"></i>
-                        <span>Node.js</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fab fa-node-js node"></i></div>
+                        <span class="tech-name">Node.js</span>
+                        <span class="tech-type">Backend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-server express"></i>
-                        <span>Express.js</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fas fa-server express"></i></div>
+                        <span class="tech-name">Express.js</span>
+                        <span class="tech-type">Backend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-php php"></i>
-                        <span>PHP</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fab fa-php php"></i></div>
+                        <span class="tech-name">PHP</span>
+                        <span class="tech-type">Backend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-database mySQL"></i>
-                        <span>MySQL</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fas fa-database mySQL"></i></div>
+                        <span class="tech-name">MySQL</span>
+                        <span class="tech-type">Database</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-python python"></i>
-                        <span>Python</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fab fa-python python"></i></div>
+                        <span class="tech-name">Python</span>
+                        <span class="tech-type">Backend &amp; Data</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-feather flask"></i>
-                        <span>Flask</span>
+                    <div class="tech-item glass-card" data-category="backend">
+                        <div class="tech-icon"><i class="fas fa-feather flask"></i></div>
+                        <span class="tech-name">Flask</span>
+                        <span class="tech-type">Backend</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fab fa-git-alt git"></i>
-                        <span>Git</span>
+                    <div class="tech-item glass-card" data-category="data">
+                        <div class="tech-icon"><i class="fas fa-chart-bar powerbi"></i></div>
+                        <span class="tech-name">Power BI</span>
+                        <span class="tech-type">Data Analytics</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-chart-bar powerbi"></i>
-                        <span>Power BI</span>
+                    <div class="tech-item glass-card" data-category="data">
+                        <div class="tech-icon"><i class="fas fa-file-excel excel"></i></div>
+                        <span class="tech-name">Excel</span>
+                        <span class="tech-type">Data Analytics</span>
                     </div>
-                    <div class="tech-item">
-                        <i class="fas fa-file-excel excel"></i>
-                        <span>Excel</span>
+                    <div class="tech-item glass-card" data-category="data">
+                        <div class="tech-icon"><i class="fas fa-table sql"></i></div>
+                        <span class="tech-name">DAX / SQL</span>
+                        <span class="tech-type">Data Modeling</span>
+                    </div>
+                    <div class="tech-item glass-card" data-category="tools">
+                        <div class="tech-icon"><i class="fab fa-git-alt git"></i></div>
+                        <span class="tech-name">Git</span>
+                        <span class="tech-type">Version Control</span>
+                    </div>
+                    <div class="tech-item glass-card" data-category="tools">
+                        <div class="tech-icon"><i class="fab fa-github"></i></div>
+                        <span class="tech-name">GitHub</span>
+                        <span class="tech-type">Collaboration</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects -->
-        <section id="projects" class="section reveal">
+        <!-- Selected Projects -->
+        <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-title">Selected Projects</h2>
-                <div class="projects-gallery">
-                    <article class="project-card">
+                <div class="section-header reveal">
+                    <span class="section-subtitle">Portfolio Showcase</span>
+                    <h2 class="section-title">Selected Web Projects</h2>
+                    <div class="title-underline"></div>
+                </div>
+
+                <div class="projects-gallery reveal">
+                    <!-- Project 1: Joint Inspection AI -->
+                    <article class="project-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="project-thumb thumb-joint-inspection">
+                            <div class="thumb-badge">Live AI Demo</div>
+                            <img src="joint-inspection-thumb.png" alt="Joint Inspection AI Dashboard" class="project-card-image" loading="lazy">
+                            <div class="thumb-overlay">
+                                <a href="https://joint-inspection.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Launch AI App <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-type"><i class="fas fa-camera-retro"></i> AI Construction &amp; Gap Analysis</span>
+                            </div>
+                            <h3>Construction Site Gap Analyzer</h3>
+                            <p>An intelligent TypeScript web application engineered to analyze construction site images, inspect architectural joints, and dynamically calculate accurate gap adjustment estimates.</p>
+                            <div class="project-tech-list">
+                                <span class="tech-pill"><i class="fab fa-js-square" style="color: #3178C6;"></i> TypeScript</span>
+                                <span class="tech-pill"><i class="fas fa-brain" style="color: #10B981;"></i> Image Analysis</span>
+                                <span class="tech-pill"><i class="fas fa-calculator" style="color: #F59E0B;"></i> Gap Estimator</span>
+                            </div>
+                            <div class="project-links">
+                                <a class="project-link-action" href="https://joint-inspection.vercel.app/" target="_blank" rel="noopener">
+                                    <span>Try Live Analyzer</span>
+                                    <i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Word Scramble -->
+                    <article class="project-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
                         <div class="project-thumb thumb-word-game">
-                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-gamepad"></i></div>
-                            <span class="thumb-label">Word Scramble · Live</span>
+                            <div class="thumb-badge">Live Demo Ready</div>
+                            <img src="word-scramble-thumb.png" alt="Word Scramble Game UI" class="project-card-image" loading="lazy">
+                            <div class="thumb-overlay">
+                                <a href="https://word-scrabbled.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Launch Game <i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
                         <div class="project-content">
+                            <div class="project-meta">
+                                <span class="project-type"><i class="fas fa-cube"></i> Interactive Web App</span>
+                            </div>
                             <h3>Word Scramble Game</h3>
-                            <p>An interactive word puzzle game with XP progression, combos, power-ups, and a polished glassmorphism UI.</p>
-                            <div class="project-tech">
-                                <i class="fab fa-html5 html" title="HTML5"></i>
-                                <i class="fab fa-css3-alt css" title="CSS3"></i>
-                                <i class="fab fa-js-square js" title="JavaScript"></i>
+                            <p>An addictive interactive word puzzle game featuring XP progression systems, streak combos, timed power-ups, and a pristine glassmorphism UI.</p>
+                            <div class="project-tech-list">
+                                <span class="tech-pill"><i class="fab fa-html5"></i> HTML5</span>
+                                <span class="tech-pill"><i class="fab fa-css3-alt"></i> CSS3 Glass</span>
+                                <span class="tech-pill"><i class="fab fa-js-square"></i> Vanilla JS</span>
                             </div>
                             <div class="project-links">
-                                <a class="btn btn-ghost" href="https://word-scrabbled.vercel.app/" target="_blank" rel="noopener" aria-label="View Word Scramble live demo">Live Demo</a>
+                                <a class="project-link-action" href="https://word-scrabbled.vercel.app/" target="_blank" rel="noopener">
+                                    <span>Play Live Demo</span>
+                                    <i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card">
+                    <!-- Project 3: Savory Restaurant -->
+                    <article class="project-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
                         <div class="project-thumb thumb-restaurant">
-                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-utensils"></i></div>
-                            <span class="thumb-label">Restaurant · Frontend</span>
+                            <div class="thumb-badge badge-frontend">Frontend UI</div>
+                            <img src="savory-restaurant-thumb.png" alt="Savory Fine Dining UI" class="project-card-image" loading="lazy">
+                            <div class="thumb-overlay">
+                                <a href="#" class="btn btn-primary btn-sm">Explore Architecture <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                         <div class="project-content">
-                            <h3>Savory — Restaurant Landing Page</h3>
-                            <p>A modern, fully responsive restaurant landing page with smooth animations, menu sections, and reservation form.</p>
-                            <div class="project-tech">
-                                <i class="fab fa-html5 html" title="HTML5"></i>
-                                <i class="fab fa-css3-alt css" title="CSS3"></i>
-                                <i class="fab fa-js-square js" title="JavaScript"></i>
+                            <div class="project-meta">
+                                <span class="project-type"><i class="fas fa-palette"></i> Responsive Landing Page</span>
+                            </div>
+                            <h3>Savory — Fine Dining Web Experience</h3>
+                            <p>A sophisticated, fully responsive culinary landing page engineered with fluid micro-animations, interactive menu tabs, and a streamlined reservation workflow.</p>
+                            <div class="project-tech-list">
+                                <span class="tech-pill"><i class="fab fa-html5"></i> HTML5</span>
+                                <span class="tech-pill"><i class="fab fa-css3-alt"></i> Modern CSS</span>
+                                <span class="tech-pill"><i class="fab fa-js-square"></i> JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a class="btn btn-ghost" href="#" aria-label="View restaurant project">View Details</a>
+                                <a class="project-link-action" href="#">
+                                    <span>Explore Architecture</span>
+                                    <i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card">
+                    <!-- Project 4: TaskFlow -->
+                    <article class="project-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
                         <div class="project-thumb thumb-task-app">
-                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-check-double"></i></div>
-                            <span class="thumb-label">Full-Stack App</span>
+                            <div class="thumb-badge badge-fullstack">Full-Stack</div>
+                            <img src="taskflow-app-thumb.png" alt="TaskFlow Agile App UI" class="project-card-image" loading="lazy">
+                            <div class="thumb-overlay">
+                                <a href="#" class="btn btn-primary btn-sm">View Case Study <i class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
                         <div class="project-content">
-                            <h3>TaskFlow — Task Management App</h3>
-                            <p>A full-stack task management app with user authentication, CRUD operations, and a clean dashboard interface.</p>
-                            <div class="project-tech">
-                                <i class="fab fa-react react" title="React"></i>
-                                <i class="fab fa-node-js node" title="Node.js"></i>
-                                <i class="fas fa-database mySQL" title="MySQL"></i>
+                            <div class="project-meta">
+                                <span class="project-type"><i class="fas fa-layer-group"></i> Full-Stack Application</span>
+                            </div>
+                            <h3>TaskFlow — Agile Task Manager</h3>
+                            <p>A comprehensive full-stack productivity suite equipped with secure user authentication, real-time CRUD operations, and an intuitive drag-and-drop dashboard interface.</p>
+                            <div class="project-tech-list">
+                                <span class="tech-pill"><i class="fab fa-react"></i> React</span>
+                                <span class="tech-pill"><i class="fab fa-node-js"></i> Node.js</span>
+                                <span class="tech-pill"><i class="fas fa-database"></i> MySQL</span>
                             </div>
                             <div class="project-links">
-                                <a class="btn btn-ghost" href="#" aria-label="View TaskFlow project">View Details</a>
+                                <a class="project-link-action" href="#">
+                                    <span>View Case Study</span>
+                                    <i class="fas fa-arrow-right link-arrow"></i>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -220,91 +481,186 @@
             </div>
         </section>
 
-        <!-- Data Analysis & Power BI -->
-        <section id="data-analysis" class="section reveal">
+        <!-- Data Analysis & Power BI Section -->
+        <section id="data-analysis" class="section bg-alt">
             <div class="container">
-                <h2 class="section-title">Data Analysis & Power BI</h2>
-                <div class="data-content">
-                    <p>I design interactive Power BI dashboards that turn complex datasets into clear, actionable insights. From data cleaning and transformation with Power Query to building calculated measures with DAX — I deliver end-to-end analytics solutions.</p>
-                    <div class="data-cards">
-                        <div class="data-card">
-                            <img src="powerbi-sales-dashboard.png" alt="Sales Performance Analytics Dashboard" class="data-card-image" loading="lazy">
-                            <div class="data-card-body">
+                <div class="section-header reveal">
+                    <span class="section-subtitle">Business Intelligence</span>
+                    <h2 class="section-title">Power BI &amp; Data Storytelling</h2>
+                    <div class="title-underline"></div>
+                </div>
+                
+                <p class="data-intro reveal">
+                    I design end-to-end analytical solutions that transform raw data into clarity. From robust data cleaning and dimensional modeling in <strong>Power Query</strong> to complex statistical measures in <strong>DAX</strong>, I build executive dashboards that empower data-driven leadership.
+                </p>
+
+                <div class="data-cards reveal">
+                    <!-- Dashboard 1: Sales Analytics -->
+                    <article class="data-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="data-card-header">
+                            <div class="data-metric-badge">$2.4M+ Revenue Tracked</div>
+                            <div class="data-image-wrapper">
+                                <img src="powerbi-sales-dashboard.png" alt="Sales Performance Analytics Dashboard" class="data-card-image" loading="lazy">
+                                <div class="data-image-overlay">
+                                    <span class="view-zoom-hint"><i class="fas fa-chart-line"></i> Executive Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-card-body">
+                            <div class="data-card-top">
                                 <h3>Sales Performance Analytics</h3>
-                                <p>Executive-level dashboard tracking $2.4M+ in revenue, order trends, regional breakdowns, and top-performing products across 12 months.</p>
+                                <span class="data-status-dot" title="Active Model"></span>
+                            </div>
+                            <p>An enterprise-grade sales tracking suite analyzing $2.4M+ in annual revenue, multi-regional order trends, product profitability margins, and YOY growth across 12 fiscal months.</p>
+                            <div class="data-card-footer">
                                 <div class="data-card-tags">
-                                    <span class="tag">Power BI</span>
-                                    <span class="tag">DAX</span>
-                                    <span class="tag">SQL</span>
+                                    <span class="tag"><i class="fas fa-bolt"></i> Power BI</span>
+                                    <span class="tag"><i class="fas fa-code"></i> DAX</span>
+                                    <span class="tag"><i class="fas fa-table"></i> SQL Modeling</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="data-card">
-                            <img src="powerbi-hr-dashboard.png" alt="HR Analytics Dashboard" class="data-card-image" loading="lazy">
-                            <div class="data-card-body">
-                                <h3>HR Analytics & Employee Insights</h3>
-                                <p>People analytics dashboard for 1,200+ employees — tracking attrition, satisfaction scores, training impact, and department-level KPIs.</p>
-                                <div class="data-card-tags">
-                                    <span class="tag">Power BI</span>
-                                    <span class="tag">Power Query</span>
-                                    <span class="tag">Excel</span>
+                    </article>
+
+                    <!-- Dashboard 2: HR Analytics -->
+                    <article class="data-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="data-card-header">
+                            <div class="data-metric-badge badge-teal">1,200+ Employees Analyzed</div>
+                            <div class="data-image-wrapper">
+                                <img src="powerbi-hr-dashboard.png" alt="HR Analytics Dashboard" class="data-card-image" loading="lazy">
+                                <div class="data-image-overlay">
+                                    <span class="view-zoom-hint"><i class="fas fa-users"></i> Workforce Intelligence</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="data-card">
-                            <img src="powerbi-finance-dashboard.png" alt="Financial Analysis Dashboard" class="data-card-image" loading="lazy">
-                            <div class="data-card-body">
-                                <h3>Financial Analysis & Budget Tracking</h3>
-                                <p>Budget vs. actuals dashboard with waterfall charts, spending forecasts, and department-level variance analysis for $5M+ annual budgets.</p>
+                        <div class="data-card-body">
+                            <div class="data-card-top">
+                                <h3>HR Analytics &amp; Workforce Insights</h3>
+                                <span class="data-status-dot" title="Active Model"></span>
+                            </div>
+                            <p>Comprehensive people analytics model evaluating workforce demographics for 1,200+ personnel—monitoring attrition drivers, satisfaction indices, and department-level retention KPIs.</p>
+                            <div class="data-card-footer">
                                 <div class="data-card-tags">
-                                    <span class="tag">Power BI</span>
-                                    <span class="tag">DAX</span>
-                                    <span class="tag">Data Modeling</span>
+                                    <span class="tag"><i class="fas fa-bolt"></i> Power BI</span>
+                                    <span class="tag"><i class="fas fa-filter"></i> Power Query</span>
+                                    <span class="tag"><i class="fas fa-file-excel"></i> Excel Integration</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
+
+                    <!-- Dashboard 3: Financial Analysis -->
+                    <article class="data-card glass-card spotlight-card">
+                        <div class="spotlight-glow"></div>
+                        <div class="data-card-header">
+                            <div class="data-metric-badge badge-green">$5M+ Budget Variance</div>
+                            <div class="data-image-wrapper">
+                                <img src="powerbi-finance-dashboard.png" alt="Financial Analysis Dashboard" class="data-card-image" loading="lazy">
+                                <div class="data-image-overlay">
+                                    <span class="view-zoom-hint"><i class="fas fa-balance-scale"></i> Fiscal Forecasting</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-card-body">
+                            <div class="data-card-top">
+                                <h3>Financial Analysis &amp; Budget Tracking</h3>
+                                <span class="data-status-dot" title="Active Model"></span>
+                            </div>
+                            <p>Dynamic fiscal control dashboard featuring automated waterfall variance charts, quarterly burn forecasts, and expenditure breakdowns for $5M+ annual corporate budgets.</p>
+                            <div class="data-card-footer">
+                                <div class="data-card-tags">
+                                    <span class="tag"><i class="fas fa-bolt"></i> Power BI</span>
+                                    <span class="tag"><i class="fas fa-code"></i> Advanced DAX</span>
+                                    <span class="tag"><i class="fas fa-project-diagram"></i> Data Modeling</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
-        <section id="contact" class="section reveal">
+        <!-- Contact Section -->
+        <section id="contact" class="section">
             <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="contact-intro">I'm actively looking for junior frontend, full-stack, and data analyst opportunities. Let's connect!</p>
-                <div class="contact-actions">
-                    <a class="contact-btn" href="mailto:oyewolevictorifeoluwa@gmail.com" aria-label="Email">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span class="btn-label">Email</span>
-                    </a>
-                    <a class="contact-btn" href="https://www.linkedin.com/in/oyewole-victor-a9323b317" target="_blank" rel="noopener" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="btn-label">LinkedIn</span>
-                    </a>
-                    <a class="contact-btn" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                        <span class="btn-label">GitHub</span>
-                    </a>
-                    <a class="contact-btn" href="https://x.com/OyewoleIfeolu17" target="_blank" rel="noopener" aria-label="X">
-                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
-                        <span class="btn-label">X</span>
-                    </a>
-                    <a class="contact-btn" href="https://wa.me/2348062690609" target="_blank" rel="noopener" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                        <span class="btn-label">WhatsApp</span>
-                    </a>
+                <div class="contact-card glass-card reveal">
+                    <div class="contact-header">
+                        <span class="section-subtitle">Let's Build Together</span>
+                        <h2 class="section-title">Ready for Your Next Breakthrough?</h2>
+                        <p class="contact-intro">
+                            I am actively seeking junior frontend developer, full-stack engineer, and data analyst opportunities. Whether you have a project in mind, a data challenge to solve, or an open role on your team, let's connect!
+                        </p>
+                    </div>
+
+                    <!-- Email Action Box -->
+                    <div class="contact-email-box">
+                        <div class="email-display">
+                            <i class="fas fa-envelope email-icon"></i>
+                            <span class="email-address">oyewolevictorifeoluwa@gmail.com</span>
+                        </div>
+                        <button class="btn btn-primary copy-email-btn" data-email="oyewolevictorifeoluwa@gmail.com">
+                            <i class="far fa-copy"></i>
+                            <span>Copy Email Address</span>
+                        </button>
+                    </div>
+
+                    <!-- Social Network Buttons -->
+                    <div class="contact-actions">
+                        <a class="social-btn btn-linkedin" href="https://www.linkedin.com/in/oyewole-victor-a9323b317" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-label">LinkedIn</span>
+                        </a>
+                        <a class="social-btn btn-whatsapp" href="https://wa.me/2348062690609" target="_blank" rel="noopener" aria-label="WhatsApp Chat">
+                            <i class="fab fa-whatsapp"></i>
+                            <span class="social-label">WhatsApp</span>
+                        </a>
+                        <a class="social-btn btn-github" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub Profile">
+                            <i class="fab fa-github"></i>
+                            <span class="social-label">GitHub</span>
+                        </a>
+                        <a class="social-btn btn-x" href="https://x.com/OyewoleIfeolu17" target="_blank" rel="noopener" aria-label="X (Twitter) Profile">
+                            <i class="fab fa-x-twitter"></i>
+                            <span class="social-label">X (Twitter)</span>
+                        </a>
+                        <a class="social-btn btn-email" href="mailto:oyewolevictorifeoluwa@gmail.com" aria-label="Send Direct Email">
+                            <i class="fas fa-paper-plane"></i>
+                            <span class="social-label">Direct Mail</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Oyewole Victor Ifeoluwa. Open to opportunities.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <a href="#" class="brand">OV<span class="brand-dot">.</span></a>
+                <p>Architecting digital experiences &amp; data intelligence.</p>
+            </div>
+            <div class="footer-right">
+                <p>&copy; 2026 Oyewole Victor Ifeoluwa. Crafted with passion &amp; modern web standards.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top of page" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Copy Notification Toast -->
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <span class="toast-message">Email address copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
     <script src="./main.js" defer></script>
 </body>
 </html>

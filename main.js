@@ -1,205 +1,368 @@
-// main.js — site-wide JavaScript
+/**
+ * main.js — Oyewole Victor Portfolio
+ * Advanced Interactive Architecture & Animations
+ */
 
-document.addEventListener('DOMContentLoaded', function () {
-	const navLinks = document.querySelectorAll('nav a');
-	const OFFSET = 70;
+document.addEventListener('DOMContentLoaded', () => {
+    const NAVBAR_OFFSET = 85;
 
-	function smoothScrollTo(targetSelector) {
-		const target = document.querySelector(targetSelector);
-		if (!target) return;
-		const top = target.getBoundingClientRect().top + window.pageYOffset - OFFSET;
-		window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
-	}
+    /* ==========================================================================
+       1. SCROLL PROGRESS BAR & NAVBAR SCROLL STATE
+       ========================================================================== */
+    const progressBar = document.getElementById('scroll-progress');
+    const navbar = document.getElementById('navbar');
+    const backToTopBtn = document.getElementById('back-to-top');
+    const sections = Array.from(document.querySelectorAll('main section[id], header[id]'));
+    const navLinks = document.querySelectorAll('.nav-links .nav-item');
 
-	navLinks.forEach(function (anchor) {
-		anchor.addEventListener('click', function (e) {
-			e.preventDefault();
-			const href = this.getAttribute('href');
-			if (!href || href.charAt(0) !== '#') return;
-			smoothScrollTo(href);
-			// close mobile nav if open
-			const navLinksEl = document.getElementById('nav-links');
-			if (navLinksEl && navLinksEl.classList.contains('show')) {
-				navLinksEl.classList.remove('show');
-				document.querySelector('.nav-toggle')?.setAttribute('aria-expanded', 'false');
-			}
-		});
-	});
+    function onWindowScroll() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // Update Scroll Progress Bar
+        if (progressBar && docHeight > 0) {
+            const scrollPercent = (scrollY / docHeight) * 100;
+            progressBar.style.width = `${Math.min(scrollPercent, 100)}%`;
+        }
 
-	// Mobile nav toggle
-	const navToggle = document.querySelector('.nav-toggle');
-	const navLinksEl = document.getElementById('nav-links');
-	const mobileSidebar = document.getElementById('mobile-sidebar');
-	// overlay element (created on demand)
-	let overlay = null;
+        // Toggle Navbar Scrolled Glassmorphism State
+        if (navbar) {
+            if (scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
 
-	function createOverlay() {
-		overlay = document.createElement('div');
-		overlay.className = 'overlay';
-		document.body.appendChild(overlay);
-		overlay.addEventListener('click', closeSidebar);
-	}
+        // Toggle Back-to-Top Button
+        if (backToTopBtn) {
+            if (scrollY > 500) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }
 
-	function openSidebar() {
-		if (!mobileSidebar) return;
-		mobileSidebar.classList.add('open');
-		mobileSidebar.setAttribute('aria-hidden', 'false');
-		navToggle.setAttribute('aria-expanded', 'true');
-		if (!overlay) createOverlay();
-		requestAnimationFrame(() => overlay.classList.add('show'));
-		document.body.style.overflow = 'hidden';
-	}
+        // Scroll Spy Active Link Highlighting
+        const scrollPos = scrollY + NAVBAR_OFFSET + 100;
+        let currentSectionId = null;
 
-	function closeSidebar() {
-		if (!mobileSidebar) return;
-		mobileSidebar.classList.remove('open');
-		mobileSidebar.setAttribute('aria-hidden', 'true');
-		navToggle.setAttribute('aria-expanded', 'false');
-		if (overlay) overlay.classList.remove('show');
-		document.body.style.overflow = '';
-		setTimeout(() => { if (overlay && !overlay.classList.contains('show')) { overlay.remove(); overlay = null; } }, 350);
-	}
+        for (const sec of sections) {
+            if (scrollPos >= sec.offsetTop) {
+                currentSectionId = sec.id;
+            }
+        }
 
-	if (navToggle) {
-		navToggle.addEventListener('click', function () {
-			if (mobileSidebar) {
-				if (mobileSidebar.classList.contains('open')) closeSidebar(); else openSidebar();
-			} else if (navLinksEl) {
-				const isOpen = navLinksEl.classList.toggle('show');
-				this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-			}
-		});
-	}
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${currentSectionId}`) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
 
-	// close button inside sidebar
-	const sidebarClose = document.querySelector('.sidebar-close');
-	if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+    window.addEventListener('scroll', onWindowScroll, { passive: true });
+    onWindowScroll(); // Initial call
 
-	// Reveal on scroll
-	const revealElems = document.querySelectorAll('.reveal');
-	const revealObserver = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('visible');
-			}
-		});
-	}, { threshold: 0.15 });
-	revealElems.forEach(el => revealObserver.observe(el));
+    /* ==========================================================================
+       2. SMOOTH SCROLLING & BACK-TO-TOP
+       ========================================================================== */
+    function smoothScrollTo(targetSelector) {
+        const target = document.querySelector(targetSelector);
+        if (!target) return;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - NAVBAR_OFFSET;
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    }
 
-	const sections = Array.from(document.querySelectorAll('main section[id]'));
-	function onScrollSpy() {
-		const scrollPos = window.pageYOffset + OFFSET + 20;
-		let currentId = sections[0]?.id || null;
-		for (const sec of sections) {
-			const top = sec.offsetTop;
-			if (scrollPos >= top) currentId = sec.id;
-		}
-		document.querySelectorAll('nav a').forEach(a => {
-			const href = a.getAttribute('href');
-			if (!href || href.charAt(0) !== '#') return;
-			a.classList.toggle('active', href === `#${currentId}`);
-		});
-	}
-	window.addEventListener('scroll', onScrollSpy, { passive: true });
-	onScrollSpy();
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            e.preventDefault();
+            smoothScrollTo(href);
 
-	const typeEl = document.getElementById('typewriter');
-	if (typeEl && window.matchMedia && window.matchMedia('(min-width: 900px)').matches) {
-		const phrases = [
-			'Building responsive React apps.',
-			'Turning data into dashboards.',
-			'Crafting pixel-perfect UIs.',
-			'Writing clean, scalable code.',
-			'Creating Power BI visualizations.',
-			'Full-stack, front to back.',
-			'Always learning, always building.'
-		];
+            // Close mobile sidebar if open
+            closeMobileSidebar();
+        });
+    });
 
-		let current = 0;
-		let charIdx = 0;
-		let deleting = false;
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-		const TYPING_SPEED = 60;
-		const DELETING_SPEED = 30;
-		const PAUSE_AFTER = 1600;
+    /* ==========================================================================
+       3. MOBILE NAVIGATION SIDEBAR
+       ========================================================================== */
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    let overlay = null;
 
-		function tick() {
-			const phrase = phrases[current];
-			if (!deleting) {
-				charIdx++;
-				typeEl.textContent = phrase.slice(0, charIdx);
-				if (charIdx === phrase.length) {
-					deleting = true;
-					setTimeout(tick, PAUSE_AFTER);
-					return;
-				}
-				setTimeout(tick, TYPING_SPEED);
-			} else {
-				charIdx--;
-				typeEl.textContent = phrase.slice(0, charIdx);
-				if (charIdx === 0) {
-					deleting = false;
-					current = (current + 1) % phrases.length;
-					setTimeout(tick, 300);
-					return;
-				}
-				setTimeout(tick, DELETING_SPEED);
-			}
-		}
+    function createOverlay() {
+        if (overlay) return overlay;
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', closeMobileSidebar);
+        return overlay;
+    }
 
-		setTimeout(tick, 700);
-	}
+    function openMobileSidebar() {
+        if (!mobileSidebar) return;
+        mobileSidebar.classList.add('open');
+        mobileSidebar.setAttribute('aria-hidden', 'false');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+        
+        const bgOverlay = createOverlay();
+        requestAnimationFrame(() => bgOverlay.style.opacity = '1');
+        document.body.style.overflow = 'hidden';
+    }
 
-	// Dark mode toggle functionality
-	const themeToggle = document.querySelector('.theme-toggle');
-	if (themeToggle) {
-		const themeIcon = themeToggle.querySelector('i');
-		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    function closeMobileSidebar() {
+        if (!mobileSidebar || !mobileSidebar.classList.contains('open')) return;
+        mobileSidebar.classList.remove('open');
+        mobileSidebar.setAttribute('aria-hidden', 'true');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        
+        if (overlay) {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                if (overlay && overlay.parentNode) {
+                    overlay.remove();
+                    overlay = null;
+                }
+            }, 300);
+        }
+        document.body.style.overflow = '';
+    }
 
-		// Check for saved theme preference or use system preference
-		const getCurrentTheme = () => {
-			const savedTheme = localStorage.getItem('theme');
-			if (savedTheme) {
-				return savedTheme;
-			}
-			return prefersDarkScheme.matches ? 'dark' : 'light';
-		};
+    if (navToggle) navToggle.addEventListener('click', openMobileSidebar);
+    if (sidebarClose) sidebarClose.addEventListener('click', closeMobileSidebar);
 
-		// Set theme and update icon with transition
-		const setTheme = (theme) => {
-			document.documentElement.setAttribute('data-theme', theme);
-			localStorage.setItem('theme', theme);
+    /* ==========================================================================
+       4. INTERACTIVE SKILL CATEGORY FILTERING
+       ========================================================================== */
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const techItems = document.querySelectorAll('.tech-item');
 
-			// Smooth icon transition
-			if (themeIcon) {
-				themeIcon.style.opacity = '0';
-				setTimeout(() => {
-					themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-					themeIcon.style.opacity = '1';
-				}, 150);
-			}
-		};
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active from all buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-		// Initialize theme on page load
-		document.documentElement.style.setProperty('--theme-transition', 'none');
-		setTheme(getCurrentTheme());
-		// Enable transitions after initial load
-		requestAnimationFrame(() => {
-			document.documentElement.style.removeProperty('--theme-transition');
-		});
+            const filter = btn.getAttribute('data-filter') || 'all';
 
-		// Toggle theme
-		themeToggle.addEventListener('click', () => {
-			const currentTheme = getCurrentTheme();
-			const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-			setTheme(newTheme);
-		});
+            techItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.classList.remove('hide');
+                    // Trigger smooth entrance animation
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.85)';
+                    requestAnimationFrame(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    });
+                } else {
+                    item.classList.add('hide');
+                }
+            });
+        });
+    });
 
-		// Listen for system theme changes
-		prefersDarkScheme.addEventListener('change', (e) => {
-			if (!localStorage.getItem('theme')) {
-				setTheme(e.matches ? 'dark' : 'light');
-			}
-		});
-	}
+    /* ==========================================================================
+       5. ANIMATED STATISTICAL NUMBER COUNTERS (INTERSECTION OBSERVER)
+       ========================================================================== */
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const targetVal = parseInt(el.getAttribute('data-target'), 10);
+                if (isNaN(targetVal)) return;
+
+                let startVal = 0;
+                const duration = 1600; // ms
+                const startTime = performance.now();
+
+                function animateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing out cubic for smooth deceleration
+                    const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                    const currentVal = Math.floor(easeOutCubic * targetVal);
+
+                    el.textContent = currentVal.toLocaleString();
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animateCounter);
+                    } else {
+                        el.textContent = targetVal.toLocaleString();
+                    }
+                }
+
+                requestAnimationFrame(animateCounter);
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    statNumbers.forEach(numEl => counterObserver.observe(numEl));
+
+    /* ==========================================================================
+       6. SPOTLIGHT CARD GLARE HOVER EFFECT
+       ========================================================================== */
+    const spotlightCards = document.querySelectorAll('.spotlight-card');
+
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    /* ==========================================================================
+       7. COPY EMAIL TO CLIPBOARD & TOAST NOTIFICATION
+       ========================================================================== */
+    const copyButtons = document.querySelectorAll('.copy-email-btn');
+    const toast = document.getElementById('toast');
+    let toastTimeout = null;
+
+    function showToast(message = "Email address copied to clipboard!") {
+        if (!toast) return;
+        const msgEl = toast.querySelector('.toast-message');
+        if (msgEl) msgEl.textContent = message;
+
+        toast.classList.add('show');
+        
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3500);
+    }
+
+    copyButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const email = btn.getAttribute('data-email') || 'oyewolevictorifeoluwa@gmail.com';
+            
+            try {
+                await navigator.clipboard.writeText(email);
+                showToast("Email copied to clipboard! ✅");
+                
+                // Visual feedback on button
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<i class="fas fa-check text-success"></i> <span>Copied!</span>`;
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers or permission issues
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast("Email copied to clipboard! ✅");
+                } catch (e) {
+                    showToast("Failed to copy. Please copy manually!");
+                }
+                document.body.removeChild(textArea);
+            }
+        });
+    });
+
+    /* ==========================================================================
+       8. ENHANCED TYPEWRITER EFFECT
+       ========================================================================== */
+    const typeEl = document.getElementById('typewriter');
+    if (typeEl) {
+        const phrases = [
+            'Building responsive React apps...',
+            'Turning complex data into BI dashboards...',
+            'Crafting pixel-perfect web interfaces...',
+            'Writing scalable full-stack code...',
+            'Creating executive Power BI models...',
+            'Always learning, always innovating.'
+        ];
+
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        let typeSpeed = 70;
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIdx];
+            
+            if (isDeleting) {
+                charIdx--;
+                typeEl.textContent = currentPhrase.slice(0, charIdx);
+                typeSpeed = 35;
+            } else {
+                charIdx++;
+                typeEl.textContent = currentPhrase.slice(0, charIdx);
+                typeSpeed = 65;
+            }
+
+            // If word is completely typed out
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typeSpeed = 2000; // Pause at end of phrase
+                isDeleting = true;
+            } 
+            // If word is completely deleted
+            else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                typeSpeed = 400; // Pause before new word starts
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+
+        setTimeout(typeLoop, 800);
+    }
+
+    /* ==========================================================================
+       9. PERMANENT DARK THEME ENFORCEMENT
+       ========================================================================== */
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.removeItem('ov_theme');
+
+
+    /* ==========================================================================
+       10. REVEAL ON SCROLL INTERSECTION OBSERVER
+       ========================================================================== */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: unobserve if we only want animation once
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
 });
