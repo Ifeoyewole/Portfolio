@@ -106,13 +106,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	const typeEl = document.getElementById('typewriter');
 	if (typeEl && window.matchMedia && window.matchMedia('(min-width: 900px)').matches) {
 		const phrases = [
-			'Building interactive interfaces.',
-			'Visualizing data with Power BI.',
-			'Designing delightful user experiences.',
-			'Creating responsive web designs.',
-			'Crafting clean, maintainable code.',
-			'Bridging design and development.',
-			'Exploring new web technologies.'
+			'Building responsive React apps.',
+			'Turning data into dashboards.',
+			'Crafting pixel-perfect UIs.',
+			'Writing clean, scalable code.',
+			'Creating Power BI visualizations.',
+			'Full-stack, front to back.',
+			'Always learning, always building.'
 		];
 
 		let current = 0;
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (themeToggle) {
 		const themeIcon = themeToggle.querySelector('i');
 		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-		
+
 		// Check for saved theme preference or use system preference
 		const getCurrentTheme = () => {
 			const savedTheme = localStorage.getItem('theme');
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const setTheme = (theme) => {
 			document.documentElement.setAttribute('data-theme', theme);
 			localStorage.setItem('theme', theme);
-			
+
 			// Smooth icon transition
 			if (themeIcon) {
 				themeIcon.style.opacity = '0';

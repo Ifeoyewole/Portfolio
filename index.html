@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Oyewole Victor | Full-Stack Developer & Data Analyst</title> 
+    <title>Oyewole Victor | Frontend Developer & Data Analyst</title>
+    <meta name="description" content="Junior Frontend & Full-Stack Developer and Data Analyst specializing in React, Next.js, and Power BI. Building beautiful web experiences and turning data into insights.">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,6 +18,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
+                    <li><a href="#data-analysis">Data</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <button class="theme-toggle" aria-label="Toggle dark mode">
@@ -33,11 +35,11 @@
         <div class="container hero-inner">
             <div class="hero-content">
                 <h1>
-                    <span class="greeting">Hello, I'm Victor.</span>
-                    <span class="title">A Full-Stack Developer & Data Analyst</span>
+                    <span class="greeting">Hi, I'm Victor 👋</span>
+                    <span class="title">Frontend Developer & Data Analyst</span>
                 </h1>
                 <p class="hero-text">
-                    I create user-focused web experiences and transform data into actionable insights.
+                    I build polished, responsive web applications and transform raw data into clear, actionable insights.
                     <span class="desktop-only" id="typewriter" aria-live="polite"></span>
                 </p>
                 <div class="hero-cta">
@@ -46,46 +48,52 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <img src="WhatsApp Image 2025-12-17 at 22.36.53_06b5bb0d.jpg" alt="WhatsApp communication illustration" class="hero-image" loading="lazy">
+                <img src="WhatsApp Image 2025-12-17 at 22.36.53_06b5bb0d.jpg" alt="Oyewole Victor" class="hero-image" loading="lazy">
             </div>
         </div>
     </header>
-    
+
     <main>
-        <section id="about" class="section">
+        <!-- About -->
+        <section id="about" class="section reveal">
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
-                    <p>Hi, I'm a full-stack developer passionate about creating beautiful, functional websites and web applications. I also specialize in data analysis and have hands-on experience with Power BI to transform raw data into actionable insights.</p>
+                    <p>I'm a junior full-stack developer and data analyst with a passion for building clean, user-focused web applications and uncovering stories hidden in data. I love working across the entire stack — from crafting pixel-perfect UIs with React and Next.js to building robust APIs with Node.js and Express.</p>
+                    <p>On the data side, I create interactive Power BI dashboards that help teams make smarter decisions. I'm always learning, always building, and always looking for the next challenge.</p>
+                    <div class="about-highlights">
+                        <div class="highlight-card">
+                            <i class="fas fa-code"></i>
+                            <h3>Frontend Dev</h3>
+                            <p>React, Next.js, responsive design & modern CSS</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-server"></i>
+                            <h3>Full-Stack</h3>
+                            <p>Node.js, Express, PHP, REST APIs & databases</p>
+                        </div>
+                        <div class="highlight-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Data Analyst</h3>
+                            <p>Power BI, DAX, SQL & data storytelling</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="data-analysis" class="section">
-            <div class="container">
-                <h2 class="section-title">Data Analysis & Power BI</h2>
-                <div class="data-content">
-                    <p>As a data analyst, I have experience using Power BI to visualize and analyze data, create dashboards, and deliver insights.</p>
-                    <ul class="skills-list">
-                        <li><i class="fas fa-check-circle"></i> Power BI Dashboard Creation</li>
-                        <li><i class="fas fa-check-circle"></i> Data Visualization and Reporting</li>
-                        <li><i class="fas fa-check-circle"></i> Data Transformation and ETL Processes</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section">
+        <!-- Skills -->
+        <section id="skills" class="section reveal">
             <div class="container">
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="tech-stack">
                     <div class="tech-item">
                         <i class="fab fa-html5 html"></i>
-                        <span>HTML</span>
+                        <span>HTML5</span>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-css3-alt css"></i>
-                        <span>CSS</span>
+                        <span>CSS3</span>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-js-square js"></i>
@@ -94,6 +102,18 @@
                     <div class="tech-item">
                         <i class="fab fa-react react"></i>
                         <span>React</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-layer-group next"></i>
+                        <span>Next.js</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-code typescript"></i>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-wind tailwind"></i>
+                        <span>Tailwind CSS</span>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-node-js node"></i>
@@ -108,25 +128,34 @@
                         <span>PHP</span>
                     </div>
                     <div class="tech-item">
+                        <i class="fas fa-database mySQL"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-python python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-item">
                         <i class="fas fa-feather flask"></i>
                         <span>Flask</span>
                     </div>
                     <div class="tech-item">
-                        <i class="fas fa-layer-group next"></i>
-                        <span>Next.js</span>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-database mySQL"></i>
-                        <span>mySQL</span>
+                        <i class="fab fa-git-alt git"></i>
+                        <span>Git</span>
                     </div>
                     <div class="tech-item">
                         <i class="fas fa-chart-bar powerbi"></i>
                         <span>Power BI</span>
                     </div>
+                    <div class="tech-item">
+                        <i class="fas fa-file-excel excel"></i>
+                        <span>Excel</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Projects -->
         <section id="projects" class="section reveal">
             <div class="container">
                 <h2 class="section-title">Selected Projects</h2>
@@ -134,52 +163,56 @@
                     <article class="project-card">
                         <div class="project-thumb thumb-word-game">
                             <div class="thumb-logo" aria-hidden="true"><i class="fas fa-gamepad"></i></div>
-                            <span class="thumb-label">Word Game · Live</span>
+                            <span class="thumb-label">Word Scramble · Live</span>
                         </div>
                         <div class="project-content">
-                            <h3>A fun game where players rearrange letters to form words</h3>
+                            <h3>Word Scramble Game</h3>
+                            <p>An interactive word puzzle game with XP progression, combos, power-ups, and a polished glassmorphism UI.</p>
                             <div class="project-tech">
                                 <i class="fab fa-html5 html" title="HTML5"></i>
                                 <i class="fab fa-css3-alt css" title="CSS3"></i>
                                 <i class="fab fa-js-square js" title="JavaScript"></i>
                             </div>
                             <div class="project-links">
-                                <a class="btn btn-ghost" href="https://word-scrabbled.vercel.app/" target="_blank" rel="noopener" aria-label="View project 1 live demo">Live Demo</a>
+                                <a class="btn btn-ghost" href="https://word-scrabbled.vercel.app/" target="_blank" rel="noopener" aria-label="View Word Scramble live demo">Live Demo</a>
                             </div>
                         </div>
                     </article>
 
-                    <section>
-                        
-                    </section>
                     <article class="project-card">
-                        <div class="project-thumb thumb-data-dashboard">
-                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-chart-bar"></i></div>
-                            <span class="thumb-label">Data Dashboard</span>
+                        <div class="project-thumb thumb-restaurant">
+                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-utensils"></i></div>
+                            <span class="thumb-label">Restaurant · Frontend</span>
                         </div>
                         <div class="project-content">
-                            <h3>Power BI Data Dashboard</h3>
-                            <p>Interactive dashboard with data visualizations and analytics.</p>
-                            <div class="project-screens">
-                                <figure class="screen">
-                                    <a href="Screenshot 2025-09-16 140607.png" target="_blank" rel="noopener">
-                                        <img src="Screenshot 2025-09-16 140607.png" alt="Dashboard screenshot 1" loading="lazy">
-                                    </a>
-                                    <figcaption>Overview</figcaption>
-                                </figure>
-                                <figure class="screen">
-                                    <a href="Screenshot 2025-09-16 140846.png" target="_blank" rel="noopener">
-                                        <img src="Screenshot 2025-09-16 140846.png" alt="Dashboard screenshot 2" loading="lazy">
-                                    </a>
-                                    <figcaption>Analytics</figcaption>
-                                </figure>
-                            </div>
+                            <h3>Savory — Restaurant Landing Page</h3>
+                            <p>A modern, fully responsive restaurant landing page with smooth animations, menu sections, and reservation form.</p>
                             <div class="project-tech">
-                                <i class="fas fa-chart-bar powerbi" title="Power BI"></i>
-                                <i class="fas fa-database sql" title="SQL"></i>
+                                <i class="fab fa-html5 html" title="HTML5"></i>
+                                <i class="fab fa-css3-alt css" title="CSS3"></i>
+                                <i class="fab fa-js-square js" title="JavaScript"></i>
                             </div>
                             <div class="project-links">
-                                <a class="btn btn-ghost" href="#" aria-label="View project 2">View Details</a>
+                                <a class="btn btn-ghost" href="#" aria-label="View restaurant project">View Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-thumb thumb-task-app">
+                            <div class="thumb-logo" aria-hidden="true"><i class="fas fa-check-double"></i></div>
+                            <span class="thumb-label">Full-Stack App</span>
+                        </div>
+                        <div class="project-content">
+                            <h3>TaskFlow — Task Management App</h3>
+                            <p>A full-stack task management app with user authentication, CRUD operations, and a clean dashboard interface.</p>
+                            <div class="project-tech">
+                                <i class="fab fa-react react" title="React"></i>
+                                <i class="fab fa-node-js node" title="Node.js"></i>
+                                <i class="fas fa-database mySQL" title="MySQL"></i>
+                            </div>
+                            <div class="project-links">
+                                <a class="btn btn-ghost" href="#" aria-label="View TaskFlow project">View Details</a>
                             </div>
                         </div>
                     </article>
@@ -187,10 +220,59 @@
             </div>
         </section>
 
-        <section id="contact" class="section">
+        <!-- Data Analysis & Power BI -->
+        <section id="data-analysis" class="section reveal">
+            <div class="container">
+                <h2 class="section-title">Data Analysis & Power BI</h2>
+                <div class="data-content">
+                    <p>I design interactive Power BI dashboards that turn complex datasets into clear, actionable insights. From data cleaning and transformation with Power Query to building calculated measures with DAX — I deliver end-to-end analytics solutions.</p>
+                    <div class="data-cards">
+                        <div class="data-card">
+                            <img src="powerbi-sales-dashboard.png" alt="Sales Performance Analytics Dashboard" class="data-card-image" loading="lazy">
+                            <div class="data-card-body">
+                                <h3>Sales Performance Analytics</h3>
+                                <p>Executive-level dashboard tracking $2.4M+ in revenue, order trends, regional breakdowns, and top-performing products across 12 months.</p>
+                                <div class="data-card-tags">
+                                    <span class="tag">Power BI</span>
+                                    <span class="tag">DAX</span>
+                                    <span class="tag">SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <img src="powerbi-hr-dashboard.png" alt="HR Analytics Dashboard" class="data-card-image" loading="lazy">
+                            <div class="data-card-body">
+                                <h3>HR Analytics & Employee Insights</h3>
+                                <p>People analytics dashboard for 1,200+ employees — tracking attrition, satisfaction scores, training impact, and department-level KPIs.</p>
+                                <div class="data-card-tags">
+                                    <span class="tag">Power BI</span>
+                                    <span class="tag">Power Query</span>
+                                    <span class="tag">Excel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-card">
+                            <img src="powerbi-finance-dashboard.png" alt="Financial Analysis Dashboard" class="data-card-image" loading="lazy">
+                            <div class="data-card-body">
+                                <h3>Financial Analysis & Budget Tracking</h3>
+                                <p>Budget vs. actuals dashboard with waterfall charts, spending forecasts, and department-level variance analysis for $5M+ annual budgets.</p>
+                                <div class="data-card-tags">
+                                    <span class="tag">Power BI</span>
+                                    <span class="tag">DAX</span>
+                                    <span class="tag">Data Modeling</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section reveal">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
-                <p class="contact-intro">Prefer a quick message? Use one of the channels below or send an email.</p>
+                <p class="contact-intro">I'm actively looking for junior frontend, full-stack, and data analyst opportunities. Let's connect!</p>
                 <div class="contact-actions">
                     <a class="contact-btn" href="mailto:oyewolevictorifeoluwa@gmail.com" aria-label="Email">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -199,6 +281,10 @@
                     <a class="contact-btn" href="https://www.linkedin.com/in/oyewole-victor-a9323b317" target="_blank" rel="noopener" aria-label="LinkedIn">
                         <i class="fab fa-linkedin" aria-hidden="true"></i>
                         <span class="btn-label">LinkedIn</span>
+                    </a>
+                    <a class="contact-btn" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <span class="btn-label">GitHub</span>
                     </a>
                     <a class="contact-btn" href="https://x.com/OyewoleIfeolu17" target="_blank" rel="noopener" aria-label="X">
                         <i class="fab fa-x-twitter" aria-hidden="true"></i>
@@ -215,7 +301,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Oyewole Victor Ifeoluwa</p>
+            <p>&copy; 2026 Oyewole Victor Ifeoluwa. Open to opportunities.</p>
         </div>
     </footer>
 
