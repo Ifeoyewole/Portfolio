@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main id="main-content" className="shell interior-page">
-      <p className="eyebrow">01 / PERSON BEHIND THE PIXELS</p>
+      <p className="eyebrow">ABOUT THE DEVELOPER</p>
       <h1 className="page-title">MORE THAN<br/><em>THE CODE.</em></h1>
       <div className="editorial-columns">
-        <p className="lede">I'm Victor, also known as <strong>OrbitNode</strong>. I enjoy turning complicated ideas into digital experiences that feel effortless.</p>
+        <p className="lede">I'm <strong>Oyewole Victor Ifeoluwa</strong>, better known as <strong>OrbitNode</strong>. I'm a frontend developer who cares just as much about how software feels as how well it works.</p>
         <div className="body-copy">
-          <p>I'm a Computer Science student at Ladoke Akintola University of Technology (LAUTECH), Nigeria, and a developer drawn to the intersection of interface design, useful software, and technical problem solving.</p>
+          <p>I study <strong>Computer Science at Ladoke Akintola University of Technology (LAUTECH)</strong> in Ogbomoso, Nigeria. University introduced me to the fundamentals; building my own projects has taught me how to put those ideas to work.</p>
           <p>My strongest focus is frontend engineering with JavaScript, TypeScript, React, and Next.js. I also work with PHP and Python, API integrations, databases, and data tools when a problem needs more than a beautiful interface.</p>
-          <p>I learn through real projects: collaboration, iteration, debugging, and finding better ways to ship ideas people can use.</p>
+          <p>From interactive websites and developer tools to my frontend contribution on a collaborative pipe-inspection platform, I enjoy solving practical problems, refining the details, and learning through feedback. Outside the main frontend stack, I'm growing my skills in Python, APIs, data analysis, and computer vision.</p>
         </div>
       </div>
       <div className="big-quote">"DESIGN IS HOW IT FEELS.<br/><em>ENGINEERING IS HOW IT WORKS.</em>"</div>

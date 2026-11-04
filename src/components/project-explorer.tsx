@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { projects, type ProjectCategory } from "@/lib/projects";
 
 const categories: Array<"All work" | ProjectCategory> = [
@@ -31,7 +32,8 @@ export function ProjectExplorer() {
       <div className="projects-list">
         {visible.map((project) => (
           <Link className="project-line" href={"/projects/" + project.slug} key={project.slug}>
-            <span className="project-num">{project.number} /</span>
+            <span className="project-num">{project.number}</span>
+            <span className="project-thumb">{project.image ? <Image src={project.image} alt="" fill sizes="90px" /> : <span>{project.number}</span>}</span>
             <span className="project-line-main"><strong>{project.title}</strong><small>{project.tagline}</small></span>
             <span className="project-kind">{project.category}</span>
             <ArrowUpRight className="project-arrow" size={26} aria-hidden="true" />

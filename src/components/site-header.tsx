@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { navigation } from "@/lib/site";
+import { BrandMark } from "@/components/brand-mark";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -14,7 +15,7 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="shell header-inner">
         <Link href="/" className="brand" aria-label="OrbitNode home" onClick={() => setOpen(false)}>
-          <span className="brand-symbol">O<span>·</span></span>
+          <BrandMark className="brand-mark" />
           <span className="brand-name">ORBITNODE<span className="trademark">®</span></span>
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">

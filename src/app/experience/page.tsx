@@ -24,7 +24,7 @@ const experiences = [
   {
     period: "COLLABORATIVE DEVELOPMENT",
     title: "Pipe Joint Inspection App",
-    subtitle: "Frontend / UI engineering",
+    subtitle: "Frontend & UI engineering",
     text: "Developing React interfaces and inspection user journeys in collaboration with backend and systems engineering contributors."
   }
 ];
@@ -32,7 +32,7 @@ const experiences = [
 export default function ExperiencePage() {
   return (
     <main id="main-content" className="shell interior-page">
-      <p className="eyebrow">03 / EXPERIENCE</p>
+      <p className="eyebrow">03 · EXPERIENCE</p>
       <h1 className="page-title">LEARNING BY<br/><em>BUILDING.</em></h1>
       <p className="page-intro">A journey shaped by practical work, team projects, industry exposure, and constant iteration.</p>
       <div className="timeline">

@@ -48,3 +48,7 @@ Google Search Console indexing should be requested only after the domain launche
 
 Selected work is described according to documented contributions. In particular, Pipe Joint Inspection is collaborative; OrbitNode's documented responsibility is frontend/UI engineering. No private phone or email address is published. 
 
+
+## Visual refresh
+
+The updated preview uses the original portrait, project thumbnails, and Power BI screenshots from `main`. Featured projects link to their real GitHub repositories and known live demos. The modern hero replaces its 3D sculpture with a portrait in an animated orbital frame, while the 3D experiment remains in `/playground`. Icons use subdued brand-specific colors on the Obsidian + Porcelain interface.

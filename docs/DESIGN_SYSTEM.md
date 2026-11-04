@@ -21,7 +21,7 @@ Editorial layouts + sculptural 3D + intentional motion. Every page should be use
 | Obsidian | #111017 | Backgrounds, depth, lowlights, text on light surfaces |
 | Porcelain | #F5F0E8 | Primary text, buttons, highlights, illuminated 3D materials |
 
-**Strict constraint:** no purple, gold, green, cyan or other chromatic accents anywhere. The visual range comes from blending and opacity of these two base colors only. Use CSS alpha, `color-mix()`, font contrast, borders, physical material properties and light direction to establish dimension. Use neutral monochrome hover and focus states. Even the favicon and 3D sculpture must use only Obsidian and Porcelain.
+**UI constraint:** Obsidian and Porcelain remain the only interface palette. Real portfolio photography retains its natural colors. Small muted technology brand icons may use their recognizable brand tones; these are not new interface accent colors. Use CSS alpha, `color-mix()`, font contrast, borders, physical material properties and light direction to establish dimension. Use neutral monochrome hover and focus states. Even the favicon and 3D sculpture must use only Obsidian and Porcelain.
 
 ### Typography
 
@@ -111,3 +111,13 @@ Never render lengthy body copy in uppercase. Longform project descriptions are s
 - Focus, reduced motion, CSS fallback and 3D behaviors checked.
 - Lighthouse, Core Web Vitals, mobile, color contrast and device performance to be checked before deployment.
 
+
+## Visual assets and refreshed interactions
+
+- Portrait and seven original portfolio images are referenced from the original `main` branch and copied unchanged as Git blobs into `public/media/` on the development branch.
+- The homepage uses the authentic portrait in an aligned editorial frame and orbit outline; the original procedural 3D scene remains in the Creative Lab.
+- Project rows and case studies use the corresponding project screenshots where verified.
+- A refined OV orbital monogram now identifies the brand in the navbar and favicon.
+- Motion consists of progressive reveal, subtle editorial entrance, image zoom and portrait ornament movement; all suppressed under `prefers-reduced-motion`.
+- Tool icons use small, desaturated brand colors to help scanning while all primary UI colors stay Obsidian and Porcelain.
+- GitHub and live links are taken from verified source repositories or from the original portfolio. Never fabricate a demo URL.

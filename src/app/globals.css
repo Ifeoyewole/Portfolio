@@ -283,3 +283,111 @@ a, button { -webkit-tap-highlight-color: transparent; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
+
+
+/* ── OrbitNode refresh: editorial portrait, portfolio photography and motion ── */
+.brand-mark { width: 44px; height: 44px; flex: none; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.brand:hover .brand-mark { transform: rotate(-12deg) scale(1.04); }
+.brand-name { letter-spacing: -.045em; }
+.hero { position: relative; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -1; width: 90vw; height: 88%; left: -34vw; top: -22%; pointer-events: none;
+  background: radial-gradient(ellipse at 55% 55%, rgba(245,240,232,.055), transparent 61%);
+  filter: blur(50px);
+}
+.hero-copy { animation: editorial-enter 950ms cubic-bezier(.18,.75,.12,1) both; }
+.hero-title { animation: editorial-enter 1000ms 90ms cubic-bezier(.18,.75,.12,1) both; }
+.hero-description { animation: editorial-enter 950ms 180ms cubic-bezier(.18,.75,.12,1) both; }
+.hero-actions { animation: editorial-enter 950ms 250ms cubic-bezier(.18,.75,.12,1) both; }
+.hero-art { animation: editorial-enter 1100ms 120ms cubic-bezier(.18,.75,.12,1) both; }
+.hero-title em, .page-title em { color: rgba(245,240,232,.86); }
+.portrait-stage { position: relative; min-height: clamp(370px, 42vw, 595px); display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 47%, rgba(245,240,232,.14) 0%, rgba(245,240,232,.055) 31%, transparent 70%);
+}
+.portrait-aura { position: absolute; inset: 6%; pointer-events:none;
+  background: radial-gradient(ellipse, rgba(245,240,232,.19),transparent 64%);
+  filter: blur(32px); opacity:.48; animation: gentle-glow 10s ease-in-out infinite alternate;
+}
+.portrait-orbit { position: absolute; z-index: 2; left: 50%; top: 50%; pointer-events: none; transform-origin: center;
+  border: 1px solid rgba(245,240,232,.29); border-radius: 50%;
+}
+.portrait-orbit-one { width: 92%; height: 40%; transform: translate(-50%,-50%) rotate(-29deg); animation: orbit-outline 32s linear infinite; }
+.portrait-orbit-two { width: 69%; height: 93%; border-color: rgba(245,240,232,.12); transform: translate(-50%,-50%) rotate(22deg); }
+.portrait-frame { position: relative; z-index: 1; width: min(64%, 390px); aspect-ratio: 4 / 5; overflow: hidden;
+  border: 1px solid rgba(245,240,232,.57); border-radius: 1.1rem;
+  box-shadow: 0 22px 92px rgba(17,16,23,.65), 0 0 0 10px rgba(245,240,232,.045);
+  background: var(--panel); transform: rotate(-2deg);
+  transition: transform .8s cubic-bezier(.18,.75,.12,1),box-shadow .8s;
+}
+.portrait-stage:hover .portrait-frame { transform: rotate(0deg) scale(1.025); box-shadow: 0 32px 95px rgba(17,16,23,.74),0 0 0 12px rgba(245,240,232,.065); }
+.portrait-photo { object-fit: cover; object-position: 50% 28%; filter: saturate(.76) contrast(1.04); }
+.portrait-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 56%,rgba(17,16,23,.86)); pointer-events: none; }
+.portrait-frame-info { position: absolute; z-index: 2; bottom: 1.1rem; left: 1.1rem; right: 1.1rem; display:flex; align-items:end; justify-content:space-between; gap:1rem;
+  color:var(--paper);font:600 .6rem/1.5 var(--font-heading); letter-spacing:.12em;
+}
+.portrait-frame-info span:last-child { font-weight:400;opacity:.76;text-align:right; }
+.featured-card { background: rgba(245,240,232,.045); border-color: rgba(245,240,232,.18); }
+.featured-card:hover { border-color:rgba(245,240,232,.58); }
+.featured-top { position:relative;z-index:3; color:var(--paper); }
+.featured-visual { position: relative; flex:1; min-height:235px; margin:0 1rem; overflow:hidden; border:1px solid rgba(245,240,232,.1); background:rgba(245,240,232,.065); }
+.featured-visual .featured-image { object-fit:cover; object-position:center top; transition:transform 750ms cubic-bezier(.18,.75,.12,1),filter 650ms; filter:grayscale(.15); }
+.featured-card:hover .featured-image { transform:scale(1.07); filter:grayscale(0); }
+.featured-view { z-index:2; display:inline-flex;align-items:center;gap:.5rem; position:absolute;right:.9rem;bottom:.8rem; color:var(--ink);
+  background:rgba(245,240,232,.94);font:700 .56rem var(--font-heading);letter-spacing:.075em;padding:.55rem .7rem; transition:transform 250ms;
+}
+.featured-card:hover .featured-view { transform:translateY(-4px); }
+.featured-bottom { background:linear-gradient(180deg,transparent,rgba(17,16,23,.38)); }
+.project-line { grid-template-columns: 44px 90px minmax(0,1fr) 165px 32px; gap:1.3rem; }
+.project-thumb { position:relative;width:90px;height:64px;overflow:hidden;display:grid;place-items:center;background:rgba(245,240,232,.075);border:1px solid var(--edge);border-radius:4px; }
+.project-thumb img { object-fit:cover;object-position:top;transition:transform .35s ease; }
+.project-line:hover .project-thumb img { transform:scale(1.08); }
+.case-banner.has-image::after { display:none; }
+.case-banner .case-photo { object-fit:cover;object-position:center top; }
+.case-banner.has-image .banner-code { z-index:3;background:rgba(17,16,23,.85);padding:.5rem .7rem; }
+.case-banner.has-image .banner-arrow { z-index:3;text-shadow:0 2px 12px rgba(17,16,23,.5); }
+.case-banner.has-image { background: rgba(245,240,232,.075);border-color:rgba(245,240,232,.3); }
+.skill-tag { display:inline-flex;align-items:center;gap:.7rem;border-radius:6px;min-height:52px; padding:.7rem 1rem; background:rgba(245,240,232,.035);
+  transition:transform .25s,border-color .25s,background .25s;
+}
+.skill-tag:hover { transform:translateY(-4px);border-color:rgba(245,240,232,.5);background:rgba(245,240,232,.075); }
+.skill-icon { display:inline-flex;justify-content:center;align-items:center;filter:saturate(.72);transition:filter .3s,transform .3s; }
+.skill-tag:hover .skill-icon { filter:saturate(1);transform:scale(1.08); }
+.analytics-section { margin-top:clamp(5rem,9vw,9rem);padding-top:3rem;border-top:1px solid var(--edge); }
+.analytics-description { max-width:660px;margin:1.2rem 0 2rem; }
+.analytics-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem; }
+.analytics-tile { margin:0;border:1px solid var(--edge);background:var(--panel);padding:.65rem;transition:transform .25s,border-color .25s; }
+.analytics-tile:hover { transform:translateY(-4px);border-color:rgba(245,240,232,.48); }
+.analytics-image { position:relative;aspect-ratio:16/10;overflow:hidden; }
+.analytics-image img { object-fit:cover;object-position:center top;transition:transform .5s; }
+.analytics-tile:hover img { transform:scale(1.035); }
+.analytics-tile figcaption { padding:.8rem .45rem .35rem;font:500 .86rem var(--font-heading); }
+.motion-pending { opacity:0;transform:translateY(35px); }
+[data-scroll-reveal] { transition:opacity .85s cubic-bezier(.18,.75,.12,1),transform .85s cubic-bezier(.18,.75,.12,1); }
+.motion-pending.in-view { opacity:1;transform:translateY(0); }
+.page-title { animation:editorial-enter 850ms cubic-bezier(.18,.75,.12,1) both; }
+@keyframes editorial-enter { from {opacity:0;transform:translateY(30px)} to {opacity:1;transform:translateY(0)} }
+@keyframes gentle-glow { from {opacity:.33;transform:scale(.94)} to {opacity:.62;transform:scale(1.05)} }
+@keyframes orbit-outline { from { transform:translate(-50%,-50%) rotate(-29deg) } to {transform:translate(-50%,-50%) rotate(331deg)} }
+@media(max-width:1100px) {
+  .project-line { grid-template-columns:35px 76px minmax(0,1fr) 28px;gap:1rem; }
+  .project-thumb { width:76px;height:58px; }
+  .project-kind { display:none; }
+}
+@media(max-width:800px) {
+  .portrait-stage { min-height:420px; }
+  .portrait-frame { width:min(61%,340px); }
+  .analytics-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:550px) {
+  .portrait-stage { min-height:345px; }
+  .portrait-frame { width:64%; }
+  .portrait-frame-info { font-size:.51rem;bottom:.7rem;left:.7rem;right:.7rem; }
+  .art-index { flex-direction:column; }
+  .featured-visual { min-height:205px; }
+  .project-line { grid-template-columns:24px 67px minmax(0,1fr) 20px; gap:.6rem; }
+  .project-thumb { width:67px;height:57px; }
+  .analytics-grid { grid-template-columns:1fr; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hero-copy,.hero-title,.hero-description,.hero-actions,.hero-art,.page-title,.portrait-aura,.portrait-orbit-one { animation:none!important; }
+  .motion-pending {opacity:1!important;transform:none!important;}
+}

@@ -10,6 +10,8 @@ export type Project = {
   summary: string;
   role: string;
   stack: string[];
+  image?: string;
+  imageAlt?: string;
   challenge: string;
   approach: string;
   highlights: string[];
@@ -20,6 +22,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "pipe-joint-inspection",
+    image: "/media/joint-inspection.png",
+    imageAlt: "JointInspect dashboard showing pipeline inspection project metrics",
     title: "Pipe Joint Inspection",
     number: "01",
     category: "Collaborative systems",
@@ -31,7 +35,8 @@ export const projects: Project[] = [
     challenge: "Inspection workflows involve multiple steps and dense technical information, which need clear navigation and usable interfaces.",
     approach: "Concentrated on the presentation layer and user journeys for inspection setup, uploads, dashboards, and results, while collaborating on integration boundaries.",
     highlights: ["Project and inspection workflows", "Reusable React UI composition", "Collaboration across frontend and backend boundaries"],
-    repository: "https://github.com/Ifeoyewole/Don-t"
+    repository: "https://github.com/Ifeoyewole/Don-t",
+    live: "https://joint-inspection.vercel.app/"
   },
   {
     slug: "competition-analysis",
@@ -50,6 +55,8 @@ export const projects: Project[] = [
   },
   {
     slug: "savory",
+    image: "/media/savory-restaurant.png",
+    imageAlt: "Savory restaurant website screenshot",
     title: "Savory",
     number: "03",
     category: "Web experiences",
@@ -80,6 +87,8 @@ export const projects: Project[] = [
   },
   {
     slug: "word-scramble",
+    image: "/media/word-scramble.png",
+    imageAlt: "Word Scramble interactive game screenshot",
     title: "Word Scramble",
     number: "05",
     category: "Web experiences",
@@ -92,6 +101,23 @@ export const projects: Project[] = [
     approach: "Built an interactive word-game interface that prioritizes clear player feedback.",
     highlights: ["Interactive gameplay", "Browser-based experience", "User interface feedback"],
     live: "https://word-scrabbled.vercel.app/"
+  },
+  {
+    slug: "taskflow",
+    title: "TaskFlow",
+    number: "07",
+    category: "Web experiences",
+    year: "Frontend project",
+    tagline: "An interface concept for organizing work.",
+    summary: "A task-management frontend built with React and Vite, showcased in my original portfolio. This case study focuses on the interface, not unverified backend features.",
+    role: "Frontend implementation and UI.",
+    stack: ["React", "Vite", "CSS"],
+    image: "/media/taskflow-app.png",
+    imageAlt: "TaskFlow project interface screenshot",
+    challenge: "Make planning tasks and tracking progress easier to scan.",
+    approach: "Created a task-focused frontend layout with clear grouping and interaction patterns.",
+    highlights: ["Task-focused interface", "React component structure", "Visual organization of work"],
+    repository: "https://github.com/Ifeoyewole/TaskFlow"
   },
   {
     slug: "rokeebat-portfolio",

@@ -17,7 +17,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="shell footer-bottom">
-        <span>© {new Date().getFullYear()} ORBITNODE / OYEWOLE VICTOR IFEOLUWA</span>
+        <span>© {new Date().getFullYear()} ORBITNODE · OYEWOLE VICTOR IFEOLUWA</span>
         <span>DESIGNED WITH INTENTION. BUILT WITH CODE.</span>
       </div>
     </footer>
