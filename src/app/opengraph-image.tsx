@@ -42,7 +42,7 @@ export default function OpenGraphImage() {
             ORBITNODE
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 18, zIndex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ display: "flex", fontSize: 20, letterSpacing: "0.16em", opacity: 0.7 }}>
             DIGITAL CRAFT MEETS ENGINEERING
           </div>
