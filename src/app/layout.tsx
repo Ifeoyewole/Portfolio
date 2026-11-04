@@ -56,7 +56,7 @@ const personData = {
   sameAs: [site.github, site.linkedin],
   jobTitle: "Frontend & Full-Stack Developer",
   knowsAbout: ["React", "Next.js", "TypeScript", "Frontend engineering", "PHP", "Python", "Data analysis"],
-  alumniOf: { "@type": "CollegeOrUniversity", name: "Ladoke Akintola University of Technology", url: "https://lautech.edu.ng/" }
+  affiliation: { "@type": "CollegeOrUniversity", name: "Ladoke Akintola University of Technology", url: "https://lautech.edu.ng/" }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
