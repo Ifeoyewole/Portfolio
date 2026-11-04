@@ -17,7 +17,8 @@ const routes = [
   "/projects/savory",
   "/projects/pdf-size-reducer",
   "/projects/word-scramble",
-  "/projects/rokeebat-portfolio"
+  "/projects/rokeebat-portfolio",
+  "/projects/taskflow"
 ];
 
 const sourcePaths = [
@@ -70,6 +71,12 @@ try {
   const missing = await fetch(origin + "/projects/not-real", { signal: AbortSignal.timeout(8000) });
   if (missing.status !== 404) throw new Error("Nonexistent case study did not return HTTP 404");
 
+  for (const route of ["/media/orbitnode-portrait.jpg", "/media/joint-inspection.png", "/media/word-scramble.png", "/media/savory-restaurant.png", "/media/taskflow-app.png", "/media/powerbi-sales.png", "/media/powerbi-hr.png", "/media/powerbi-finance.png"]) {
+    const response = await fetch(origin + route, { signal: AbortSignal.timeout(8000) });
+    if (response.status !== 200) throw new Error(`Asset ${route} returned HTTP ${response.status}`);
+    if (!(response.headers.get("content-type") || "").startsWith("image/")) throw new Error(`Asset ${route} isn't served as an image`);
+    console.log(`PASS ASSET ${route}`);
+  }
   for (const route of ["/robots.txt", "/sitemap.xml", "/favicon.svg"]) {
     const response = await fetch(origin + route, { signal: AbortSignal.timeout(8000) });
     if (response.status !== 200) throw new Error(`${route} returned HTTP ${response.status}`);
