@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { Code2, Database, BarChart3, Box, Workflow } from "lucide-react";
 import type { IconType } from "react-icons";
@@ -7,11 +8,11 @@ import {
   SiTailwindcss, SiVite, SiPhp, SiPython, SiMysql, SiGit, SiGithub, SiVercel
 } from "react-icons/si";
 
-export const metadata: Metadata = {
-  title: "Stack & Capabilities",
-  description: "Technologies and capabilities OrbitNode uses in frontend development, full-stack applications, data and computer vision experiments.",
-  alternates: { canonical: "/stack" }
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/stack",
+  title: "Technical Stack — React, Next.js, Python & Data",
+  description: "Explore OrbitNode's frontend, full-stack, and data toolkit: React, Next.js, TypeScript, Python, PHP, Supabase, and Power BI dashboards."
+});
 
 type TechBrand = { icon: IconType; tone: string };
 const icons: Record<string, TechBrand> = {
