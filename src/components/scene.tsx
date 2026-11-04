@@ -18,19 +18,19 @@ function OrbitObject() {
     <group ref={sculpture}>
       <mesh>
         <icosahedronGeometry args={[1.42, 3]} />
-        <meshPhysicalMaterial color="#8C76CF" metalness={0.8} roughness={0.23} clearcoat={1} clearcoatRoughness={0.15} flatShading />
+        <meshPhysicalMaterial color="#F5F0E8" metalness={0.48} roughness={0.3} clearcoat={1} clearcoatRoughness={0.15} flatShading />
       </mesh>
       <mesh rotation={[1.02, 0.25, 0.4]}>
         <torusGeometry args={[2.05, 0.045, 12, 180]} />
-        <meshStandardMaterial color="#D4AA76" metalness={0.9} roughness={0.23} />
+        <meshStandardMaterial color="#F5F0E8" metalness={0.78} roughness={0.27} />
       </mesh>
       <mesh rotation={[-0.35, 0.7, 0.4]}>
         <torusGeometry args={[1.85, 0.022, 10, 180]} />
-        <meshStandardMaterial color="#E9E0F8" metalness={0.75} roughness={0.27} />
+        <meshStandardMaterial color="#F5F0E8" metalness={0.75} roughness={0.27} />
       </mesh>
       <mesh position={[1.76, 0.6, 0.08]}>
         <sphereGeometry args={[0.13, 24, 24]} />
-        <meshStandardMaterial color="#F7D4A2" metalness={0.4} roughness={0.2} emissive="#8C5F2B" emissiveIntensity={0.2} />
+        <meshStandardMaterial color="#F5F0E8" metalness={0.4} roughness={0.2} emissive="#111017" emissiveIntensity={0.2} />
       </mesh>
     </group>
   );
@@ -45,8 +45,8 @@ export default function OrbitScene() {
       className="orbit-canvas"
     >
       <ambientLight intensity={1.3} />
-      <directionalLight position={[4, 6, 5]} intensity={3.0} color="#F5E8D5" />
-      <pointLight position={[-4, -1, 3]} intensity={65} color="#8E6DE6" />
+      <directionalLight position={[4, 6, 5]} intensity={3.0} color="#F5F0E8" />
+      <pointLight position={[-4, -1, 3]} intensity={65} color="#F5F0E8" />
       <OrbitObject />
     </Canvas>
   );

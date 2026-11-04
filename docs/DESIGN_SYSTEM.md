@@ -14,19 +14,14 @@
 
 Editorial layouts + sculptural 3D + intentional motion. Every page should be useful without motion, and no page should depend on WebGL to deliver its essential content.
 
-### Core colors
+### Core colors — ONLY TWO
 
 | Token | Hex | Purpose |
 | --- | --- | --- |
-| Obsidian / ink | #111017 | Page ground, high-end dark editorial tone |
-| Porcelain / paper | #F5F0E8 | Primary text, bright buttons |
-| Iris | #A88AFF | Selective highlights, italic editorial emphasis |
-| Champagne | #D4AA76 | Accent rules, focus, indices, warm highlights |
-| Slate | #B6ACBF | Secondary copy |
-| Panel | #1C1922 | Card and surface layers |
-| Edge | #3B3543 | Lines, dividers, controls |
+| Obsidian | #111017 | Backgrounds, depth, lowlights, text on light surfaces |
+| Porcelain | #F5F0E8 | Primary text, buttons, highlights, illuminated 3D materials |
 
-Use Iris and Champagne sparingly. Information hierarchy comes from type and spacing, not bright filled containers.
+**Strict constraint:** no purple, gold, green, cyan or other chromatic accents anywhere. The visual range comes from blending and opacity of these two base colors only. Use CSS alpha, `color-mix()`, font contrast, borders, physical material properties and light direction to establish dimension. Use neutral monochrome hover and focus states. Even the favicon and 3D sculpture must use only Obsidian and Porcelain.
 
 ### Typography
 
@@ -58,7 +53,7 @@ Never render lengthy body copy in uppercase. Longform project descriptions are s
 
 ### 3D art direction
 
-- One original modular sculpture: faceted iris form, champagne orbital rings, restrained specular highlights.
+- One original modular sculpture: faceted iris form, porcelain orbital rings, restrained specular highlights.
 - React Three Fiber + Three.js (actual WebGL, not a prerendered static image).
 - Pointer response should be subtle; idle rotation slow enough not to distract.
 - CSS fallback if WebGL cannot initialize; automatically avoid WebGL on reduced-motion devices.
@@ -68,7 +63,7 @@ Never render lengthy body copy in uppercase. Longform project descriptions are s
 
 ### Interaction & accessibility
 
-- Visible focus rings use Champagne, 2px outline + 4px offset.
+- Visible focus rings use Porcelain, 2px outline + 4px offset.
 - Keyboard-accessible menus and project filters.
 - Reduced-motion preference disables smooth scrolling and WebGL.
 - Decorative 3D is never required for understanding or navigation.
