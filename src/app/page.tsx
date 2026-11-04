@@ -3,6 +3,18 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { ScrollMotion } from "@/components/scroll-motion";
 import { projects } from "@/lib/projects";
+import { absoluteUrl, personId, safeJsonLd, websiteId } from "@/lib/seo";
+
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": websiteId,
+  name: "OrbitNode",
+  alternateName: ["Oyewole Victor Ifeoluwa", "OV", "ov-orbitnode.dev"],
+  url: absoluteUrl("/"),
+  inLanguage: "en-NG",
+  creator: { "@id": personId }
+};
 
 export default function HomePage() {
   const featured = projects.slice(0, 3);
@@ -58,6 +70,7 @@ export default function HomePage() {
         <div>FRONTEND ENGINEERING <span>✦</span> FULL-STACK DEVELOPMENT <span>✦</span> DATA & AUTOMATION</div>
       </section>
       <section className="shell closing-section" data-scroll-reveal><p className="eyebrow">A LITTLE MORE CONTEXT</p><h2>GOOD SOFTWARE ISN'T JUST BUILT.<br/><em>IT'S THOUGHT THROUGH.</em></h2><Link href="/experience" className="button button-outline">Explore my experience <ArrowUpRight size={18}/></Link></section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteData) }} />
     </main>
   );
 }
