@@ -22,8 +22,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "pipe-joint-inspection",
-    image: "/media/joint-inspection.png",
-    imageAlt: "JointInspect dashboard showing pipeline inspection project metrics",
+    image: "/media/jointinspect-latest.webp",
+    imageAlt: "Updated JointInspect dashboard showing projects, inspections, model readiness and measurement review",
     title: "Pipe Joint Inspection",
     number: "01",
     category: "Collaborative systems",

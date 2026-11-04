@@ -121,3 +121,5 @@ Never render lengthy body copy in uppercase. Longform project descriptions are s
 - Motion consists of progressive reveal, subtle editorial entrance, image zoom and portrait ornament movement; all suppressed under `prefers-reduced-motion`.
 - Tool icons use small, desaturated brand colors to help scanning while all primary UI colors stay Obsidian and Porcelain.
 - GitHub and live links are taken from verified source repositories or from the original portfolio. Never fabricate a demo URL.
+
+- The refreshed JointInspect visual is a small optimized WebP made from the newer user-supplied dashboard screenshot; the previous thumbnail remains available as an archival asset.
