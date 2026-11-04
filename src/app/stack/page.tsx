@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Code2, Database, BarChart3, Box, Workflow } from "lucide-react";
 import type { IconType } from "react-icons";
 import {
-  SiHtml5, SiCss3, SiJavascript, SiTypescript, SiReact, SiNextdotjs,
+  SiHtml5, SiCss, SiJavascript, SiTypescript, SiReact, SiNextdotjs,
   SiTailwindcss, SiVite, SiPhp, SiPython, SiMysql, SiGit, SiGithub, SiVercel
 } from "react-icons/si";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 type TechBrand = { icon: IconType; tone: string };
 const icons: Record<string, TechBrand> = {
   HTML: { icon: SiHtml5, tone: "#E27A52" },
-  CSS: { icon: SiCss3, tone: "#5D98D9" },
+  CSS: { icon: SiCss, tone: "#5D98D9" },
   JavaScript: { icon: SiJavascript, tone: "#DFCB73" },
   TypeScript: { icon: SiTypescript, tone: "#70A3D2" },
   React: { icon: SiReact, tone: "#73C3DB" },
