@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { request as httpRequest } from "node:http";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -100,13 +101,25 @@ try {
   }
 
   // Test the legacy hostname without following the redirect away from the CI server.
-  const oldHost = await fetch(origin + "/about", {
-    headers: { host: "ifeoyewole.vercel.app" },
-    redirect: "manual",
-    signal: AbortSignal.timeout(8000)
+  // Node's fetch does not consistently preserve an overridden Host header.
+  // Use the raw HTTP client, as a real browser/request edge would.
+  const oldHost = await new Promise((resolve, reject) => {
+    const req = httpRequest({
+      hostname: "127.0.0.1",
+      port,
+      path: "/about",
+      method: "HEAD",
+      headers: { Host: "ifeoyewole.vercel.app" }
+    }, (response) => {
+      response.resume();
+      resolve({ status: response.statusCode, location: response.headers.location });
+    });
+    req.setTimeout(8000, () => req.destroy(new Error("Old host redirect timed out")));
+    req.on("error", reject);
+    req.end();
   });
-  if (oldHost.status !== 308 || oldHost.headers.get("location") !== "https://ov-orbitnode.dev/about") {
-    throw new Error(`Expected permanent old-domain redirect to canonical About; got ${oldHost.status}: ${oldHost.headers.get("location")}`);
+  if (oldHost.status !== 308 || oldHost.location !== "https://ov-orbitnode.dev/about") {
+    throw new Error(`Expected permanent old-domain redirect to canonical About; got ${oldHost.status}: ${oldHost.location}`);
   }
   console.log("PASS LEGACY REDIRECT — 308 directly to canonical custom domain");
 
