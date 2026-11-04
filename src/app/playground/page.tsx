@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { SceneClient } from "@/components/scene-client";
 
-export const metadata: Metadata = {
-  title: "Creative Lab",
-  description: "The OrbitNode creative lab: experiments with 3D sculpture, interaction design, and frontend engineering.",
-  alternates: { canonical: "/playground" }
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/playground",
+  title: "Creative Lab — 3D & Web Experiments",
+  description: "Explore OrbitNode's creative coding lab with real-time WebGL artwork, React Three Fiber experiments, and frontend interaction ideas."
+});
 
 export default function PlaygroundPage() {
   return (
