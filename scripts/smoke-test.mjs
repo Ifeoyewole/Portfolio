@@ -78,12 +78,12 @@ try {
     const canonicalTag = (html.match(/<link\b[^>]*>/g) ?? [])
       .find((tag) => /rel=["']canonical["']/.test(tag));
     const canonical = canonicalTag?.match(/href="([^"]+)"/)?.[1];
-    if (canonical !== expected) throw new Error(`${route} incorrect canonical: ${canonical} (expected ${expected})`);
+    if (!canonical || new URL(canonical).href !== new URL(expected).href) throw new Error(`${route} incorrect canonical: ${canonical} (expected ${expected})`);
 
     const ogUrlTag = (html.match(/<meta\b[^>]*>/g) ?? [])
       .find((tag) => /property=["']og:url["']/.test(tag));
     const ogUrl = ogUrlTag?.match(/content="([^"]+)"/)?.[1];
-    if (ogUrl !== expected) throw new Error(`${route} incorrect og:url: ${ogUrl}`);
+    if (!ogUrl || new URL(ogUrl).href !== new URL(expected).href) throw new Error(`${route} incorrect og:url: ${ogUrl}`);
 
     if (!/property="og:image"/.test(html)) throw new Error(`${route} missing Open Graph image`);
     if (!/name="twitter:card"/.test(html)) throw new Error(`${route} missing Twitter card`);
