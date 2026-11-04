@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ProjectExplorer } from "@/components/project-explorer";
 
-export const metadata: Metadata = {
-  title: "Selected Work",
-  description: "Explore OrbitNode's selected frontend, Python tooling, and collaborative software projects with honest role-specific case studies.",
-  alternates: { canonical: "/projects" }
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/projects",
+  title: "Projects & Case Studies",
+  description: "See OrbitNode's real projects and case studies: JointInspect frontend development, React interfaces, Python tools, Word Scramble, Savory, and TaskFlow."
+});
 
 export default function ProjectsPage() {
   return (
