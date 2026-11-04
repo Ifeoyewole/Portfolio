@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 84">
+  <rect width="84" height="84" rx="18" fill="#111017"/>
+  <circle cx="42" cy="42" r="27" fill="none" stroke="#F5F0E8" stroke-width="1.8"/>
+  <ellipse cx="42" cy="42" rx="36" ry="14" transform="rotate(-34 42 42)" fill="none" stroke="#F5F0E8" stroke-width="2.2"/>
+  <circle cx="72" cy="19" r="3.5" fill="#F5F0E8"/>
+  <text x="42" y="49" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="800" letter-spacing="-3" text-anchor="middle" fill="#F5F0E8">OV</text>
+</svg>

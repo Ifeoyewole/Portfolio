@@ -1,30 +1,54 @@
-# Portfolio — Deploy to Vercel
+# OrbitNode v2 — Premium Creative Studio
 
-This is a simple static portfolio site. The project contains:
+A standalone, multi-page developer portfolio for **Oyewole Victor Ifeoluwa (OrbitNode)**.
 
-- `index.html` (entry)
-- `style.css` (styles)
-- `main.js` (site JavaScript — contains smooth-scroll behavior)
-- `vercel.json` (static site config)
+> Development branch only. The live site at https://ifeoyewole.vercel.app is still served by main. This branch contains an independent clean Next.js rebuild; legacy static files remain on main.
 
-Quick deploy steps:
+## Stack
 
-1. Install the Vercel CLI or use the Vercel web UI.
-2. From the project root (this folder) run the Vercel CLI and follow prompts:
+- Next.js App Router + TypeScript + React
+- Tailwind CSS 4 + original editorial CSS
+- Three.js + React Three Fiber v9 for an original WebGL sculpture
+- Lightweight Lucide icons
+- SEO metadata, JSON-LD Person markup, sitemap and robots
 
-```powershell
-vercel
-```
+## Local setup
 
-When asked for the project root, choose this folder. The provided `vercel.json` will route all requests to `index.html`.
+Requires Node.js 20.9 or newer.
 
-Notes and checks before deploying:
+1. Install dependencies: npm install
+2. Run locally: npm run dev
+3. Open http://localhost:3000
+4. Check types: npm run typecheck
+5. Build: npm run build
 
-- Ensure `index.html` is the entry file (Vercel will serve it by default with the provided `vercel.json`).
-- If you add build steps (React, Next.js, etc.), add a `package.json` and update `vercel.json` accordingly.
-Notes:
+## Pages
 
-- Ensure `index.html` is the entry file (the repo is configured for static hosting with `vercel.json`).
-- The contact form currently uses `mailto:` (this opens the user's mail client). Consider a serverless form endpoint or Vercel integration if you need reliable submissions.
+- / — homepage
+- /about — story, approach and working principles
+- /projects — filterable project index
+- /projects/[slug] — individual project case studies
+- /experience — practical work and collaboration
+- /stack — engineering toolkit
+- /playground — WebGL experiment
+- /contact — professional contact links
 
-If you later add a build step (React, Next.js, etc.), add a `package.json` and update `vercel.json` accordingly.
+## Domain and SEO
+
+The canonical URL uses NEXT_PUBLIC_SITE_URL. Until the custom domain is purchased and connected, the fallback is https://ifeoyewole.vercel.app. Set NEXT_PUBLIC_SITE_URL=https://ov-orbitnode.dev on the *correct* Vercel production deployment after DNS and SSL are verified.
+
+Google Search Console indexing should be requested only after the domain launches. Google ranking is not guaranteed.
+
+## Design and next steps
+
+- docs/DESIGN_SYSTEM.md — identity, tokens, typography, 3D rules, components and accessibility
+- docs/ROADMAP.md — QA, content review, preview deployment and custom domain setup
+
+## Attribution and privacy
+
+Selected work is described according to documented contributions. In particular, Pipe Joint Inspection is collaborative; OrbitNode's documented responsibility is frontend/UI engineering. No private phone or email address is published. 
+
+
+## Visual refresh
+
+The updated preview uses the original portrait, project thumbnails, and Power BI screenshots from `main`. Featured projects link to their real GitHub repositories and known live demos. The modern hero replaces its 3D sculpture with a portrait in an animated orbital frame, while the 3D experiment remains in `/playground`. Icons use subdued brand-specific colors on the Obsidian + Porcelain interface.
