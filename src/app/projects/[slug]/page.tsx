@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProject, projects } from "@/lib/projects";
+import { absoluteUrl, pageMetadata, personId, safeJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,19 +15,42 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project) return { title: "Project not found" };
-  return {
-    title: project.title,
-    description: project.summary,
-    alternates: { canonical: "/projects/" + slug },
-    openGraph: { title: project.title + " — OrbitNode", description: project.summary }
-  };
+  if (!project) return { title: "Project not found", robots: { index: false, follow: false } };
+  return pageMetadata({
+    path: "/projects/" + slug,
+    title: project.title + " — Project Case Study",
+    description: project.summary
+  });
 }
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
+
+  const projectUrl = absoluteUrl("/projects/" + slug);
+  const caseStudyData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": projectUrl + "#case-study",
+    name: project.title,
+    description: project.summary,
+    url: projectUrl,
+    image: project.image ? absoluteUrl(project.image) : undefined,
+    genre: project.category,
+    contributor: { "@id": personId },
+    about: project.stack,
+    sameAs: [project.repository, project.live].filter(Boolean)
+  };
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+      { "@type": "ListItem", position: 2, name: "Projects", item: absoluteUrl("/projects") },
+      { "@type": "ListItem", position: 3, name: project.title, item: projectUrl }
+    ]
+  };
 
   return (
     <main id="main-content" className="shell interior-page">
@@ -59,6 +83,8 @@ export default async function CaseStudyPage({ params }: Props) {
         {project.live && <a className="button button-primary" href={project.live} target="_blank" rel="noopener noreferrer">Visit live project <ArrowUpRight size={18}/></a>}
         <Link className="button button-outline" href="/projects">All projects <ArrowLeft size={18}/></Link>
       </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(caseStudyData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbData) }} />
     </main>
   );
 }
