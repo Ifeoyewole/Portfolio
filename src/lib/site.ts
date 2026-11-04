@@ -18,6 +18,7 @@ export const navigation = [
   { href: "/contact", label: "Contact" }
 ] as const;
 
-// Keep the verified Vercel URL canonical until the custom domain is purchased and connected.
-export const baseUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://ifeoyewole.vercel.app");
+// Primary public domain: verified and attached to this project's production deployment.
+// Override only when intentionally deploying to a different canonical host.
+export const baseUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://ov-orbitnode.dev");
 
