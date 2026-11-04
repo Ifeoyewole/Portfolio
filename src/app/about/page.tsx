@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
+import { pageMetadata, absoluteUrl, personId, safeJsonLd } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "Get to know OrbitNode — Oyewole Victor Ifeoluwa, a Computer Science student and frontend/full-stack developer.",
-  alternates: { canonical: "/about" }
+export const metadata: Metadata = pageMetadata({
+  path: "/about",
+  title: "About Victor — Frontend & Full-Stack Developer",
+  description: "Meet Oyewole Victor Ifeoluwa, also known as OrbitNode: a Computer Science student at LAUTECH building responsive frontend experiences, useful web apps, and software tools."
+});
+
+const profileData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": absoluteUrl("/about#profile"),
+  url: absoluteUrl("/about"),
+  name: "About Oyewole Victor Ifeoluwa (OrbitNode)",
+  mainEntity: { "@id": personId }
 };
 
 export default function AboutPage() {
@@ -31,6 +41,7 @@ export default function AboutPage() {
         </div>
       </section>
       <Link href="/experience" className="text-link page-end-link">Explore the journey <ArrowUpRight size={18}/></Link>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(profileData) }} />
     </main>
   );
 }

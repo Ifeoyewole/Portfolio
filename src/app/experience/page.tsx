@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Experience",
-  description: "OrbitNode's practical development journey: SIWES industrial training, frontend collaboration, and real-world software projects.",
-  alternates: { canonical: "/experience" }
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/experience",
+  title: "Experience & Development Journey",
+  description: "Explore Victor Oyewole's software development experience: SIWES training, frontend internship work, and collaborative engineering on the JointInspect platform."
+});
 
 const experiences = [
   {

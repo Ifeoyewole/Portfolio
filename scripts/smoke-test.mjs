@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { request as httpRequest } from "node:http";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -68,6 +69,80 @@ try {
     if (!html.includes("OrbitNode")) throw new Error(`${route} is missing brand identity`);
     console.log(`PASS ${route} — HTTP 200, heading + branding`);
   }
+  // SEO signals must agree for every indexable page. Google uses canonical,
+  // redirects and sitemap inclusion as separate canonicalization signals.
+  for (const route of routes) {
+    const response = await fetch(origin + route, { signal: AbortSignal.timeout(8000) });
+    const html = await response.text();
+    const expected = "https://ov-orbitnode.dev" + (route === "/" ? "/" : route);
+
+    const canonicalTag = (html.match(/<link\b[^>]*>/g) ?? [])
+      .find((tag) => /rel=["']canonical["']/.test(tag));
+    const canonical = canonicalTag?.match(/href="([^"]+)"/)?.[1];
+    if (!canonical || new URL(canonical).href !== new URL(expected).href) throw new Error(`${route} incorrect canonical: ${canonical} (expected ${expected})`);
+
+    const ogUrlTag = (html.match(/<meta\b[^>]*>/g) ?? [])
+      .find((tag) => /property=["']og:url["']/.test(tag));
+    const ogUrl = ogUrlTag?.match(/content="([^"]+)"/)?.[1];
+    if (!ogUrl || new URL(ogUrl).href !== new URL(expected).href) throw new Error(`${route} incorrect og:url: ${ogUrl}`);
+
+    if (!/property="og:image"/.test(html)) throw new Error(`${route} missing Open Graph image`);
+    if (!/name="twitter:card"/.test(html)) throw new Error(`${route} missing Twitter card`);
+    if (!/name="description"/.test(html)) throw new Error(`${route} missing description`);
+    if (/name="robots"[^>]*content="[^"]*noindex/i.test(html)) throw new Error(`${route} is unexpectedly noindex`);
+
+    const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((match) => JSON.parse(match[1]));
+    if (!ld.some((node) => node["@type"] === "Person")) throw new Error(`${route} lacks Person identity markup`);
+    if (route === "/" && !ld.some((node) => node["@type"] === "WebSite")) throw new Error("Homepage lacks WebSite name markup");
+    if (route === "/about" && !ld.some((node) => node["@type"] === "ProfilePage")) throw new Error("About lacks ProfilePage markup");
+    if (route.startsWith("/projects/") && !ld.some((node) => node["@type"] === "BreadcrumbList")) throw new Error(`${route} lacks breadcrumbs`);
+    console.log(`PASS SEO ${route} — canonical, OG, Twitter, description, JSON-LD`);
+  }
+
+  // Test the legacy hostname without following the redirect away from the CI server.
+  // Node's fetch does not consistently preserve an overridden Host header.
+  // Use the raw HTTP client, as a real browser/request edge would.
+  const oldHost = await new Promise((resolve, reject) => {
+    const req = httpRequest({
+      hostname: "127.0.0.1",
+      port,
+      path: "/about",
+      method: "HEAD",
+      headers: { Host: "ifeoyewole.vercel.app" }
+    }, (response) => {
+      response.resume();
+      resolve({ status: response.statusCode, location: response.headers.location });
+    });
+    req.setTimeout(8000, () => req.destroy(new Error("Old host redirect timed out")));
+    req.on("error", reject);
+    req.end();
+  });
+  if (oldHost.status !== 308 || oldHost.location !== "https://ov-orbitnode.dev/about") {
+    throw new Error(`Expected permanent old-domain redirect to canonical About; got ${oldHost.status}: ${oldHost.location}`);
+  }
+  console.log("PASS LEGACY REDIRECT — 308 directly to canonical custom domain");
+
+  const shareImage = await fetch(origin + "/opengraph-image", { signal: AbortSignal.timeout(12000) });
+  if (shareImage.status !== 200 || !(shareImage.headers.get("content-type") ?? "").includes("image/png")) {
+    throw new Error(`Open Graph image failed: ${shareImage.status}, ${shareImage.headers.get("content-type")}`);
+  }
+  console.log("PASS SOCIAL IMAGE — image/png 1200×630");
+
+  const robotsTxt = await (await fetch(origin + "/robots.txt")).text();
+  if (!robotsTxt.includes("Sitemap: https://ov-orbitnode.dev/sitemap.xml") || robotsTxt.includes("Disallow: /")) {
+    throw new Error("Production robots.txt must allow crawling and point to the canonical sitemap");
+  }
+  const sitemapXml = await (await fetch(origin + "/sitemap.xml")).text();
+  for (const route of routes) {
+    const loc = "https://ov-orbitnode.dev" + (route === "/" ? "/" : route);
+    if (!sitemapXml.includes("<loc>" + loc + "</loc>")) {
+      throw new Error(`Sitemap missing canonical ${loc}`);
+    }
+  }
+  if (sitemapXml.includes("ifeoyewole.vercel.app")) throw new Error("Sitemap lists legacy host");
+  console.log("PASS SITEMAP — all indexable routes on canonical domain");
+
   const missing = await fetch(origin + "/projects/not-real", { signal: AbortSignal.timeout(8000) });
   if (missing.status !== 404) throw new Error("Nonexistent case study did not return HTTP 404");
 

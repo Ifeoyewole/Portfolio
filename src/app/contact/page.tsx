@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact OrbitNode (Oyewole Victor Ifeoluwa) for thoughtful frontend, full-stack, and creative engineering collaborations.",
-  alternates: { canonical: "/contact" }
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/contact",
+  title: "Contact & Collaborate",
+  description: "Connect with Oyewole Victor Ifeoluwa (OrbitNode) on GitHub or LinkedIn about React, frontend engineering, practical full-stack apps, and collaboration."
+});
 
 export default function ContactPage() {
   return (

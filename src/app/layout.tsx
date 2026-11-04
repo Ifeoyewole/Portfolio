@@ -2,36 +2,61 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { absoluteUrl, personId, safeJsonLd } from "@/lib/seo";
 import { baseUrl, site } from "@/lib/site";
 
+const image = absoluteUrl("/opengraph-image");
 export const metadata: Metadata = {
   metadataBase: baseUrl,
-  title: { default: "OrbitNode — Oyewole Victor Ifeoluwa", template: "%s | OrbitNode" },
+  title: {
+    default: "Oyewole Victor Ifeoluwa (OrbitNode) | Frontend & Full-Stack Developer",
+    template: "%s | OrbitNode"
+  },
   description: site.description,
   applicationName: "OrbitNode",
-  keywords: ["OrbitNode", "Oyewole Victor Ifeoluwa", "Victor Oyewole", "Frontend Developer", "Full-Stack Developer", "React", "Next.js", "Nigeria"],
-  alternates: { canonical: "/" },
+  keywords: [
+    "Oyewole Victor Ifeoluwa",
+    "OrbitNode",
+    "Victor Oyewole",
+    "Ifeoyewole",
+    "Frontend Developer Nigeria",
+    "Full-Stack Developer",
+    "React Developer",
+    "Next.js Developer"
+  ],
+  alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
-    title: "OrbitNode — Oyewole Victor Ifeoluwa",
-    description: site.description,
-    url: "/",
+    url: absoluteUrl("/"),
     siteName: "OrbitNode",
-    locale: "en_NG"
+    title: "Oyewole Victor Ifeoluwa (OrbitNode) — Developer Portfolio",
+    description: site.description,
+    locale: "en_NG",
+    images: [{ url: image, width: 1200, height: 630, alt: "OrbitNode developer portfolio" }]
   },
-  twitter: { card: "summary", title: "OrbitNode — Oyewole Victor Ifeoluwa", description: site.description },
-  icons: { icon: "/favicon.svg" }
+  twitter: {
+    card: "summary_large_image",
+    title: "Oyewole Victor Ifeoluwa (OrbitNode) — Developer Portfolio",
+    description: site.description,
+    images: [image]
+  },
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  other: { "color-scheme": "dark" }
 };
 
-const structuredData = {
+const personData = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": personId,
   name: site.fullName,
-  alternateName: "OrbitNode",
-  url: baseUrl.href,
+  alternateName: ["OrbitNode", "Victor Oyewole"],
+  url: absoluteUrl("/about"),
+  image: absoluteUrl("/media/orbitnode-portrait.jpg"),
+  description: site.description,
   sameAs: [site.github, site.linkedin],
   jobTitle: "Frontend & Full-Stack Developer",
-  alumniOf: { "@type": "CollegeOrUniversity", name: "Ladoke Akintola University of Technology" }
+  knowsAbout: ["React", "Next.js", "TypeScript", "Frontend engineering", "PHP", "Python", "Data analysis"],
+  affiliation: { "@type": "CollegeOrUniversity", name: "Ladoke Akintola University of Technology", url: "https://lautech.edu.ng/" }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -42,9 +67,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         {children}
         <SiteFooter />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(personData) }} />
       </body>
     </html>
   );
 }
-
