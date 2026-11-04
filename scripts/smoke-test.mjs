@@ -78,25 +78,25 @@ try {
     const canonicalTag = (html.match(/<link\b[^>]*>/g) ?? [])
       .find((tag) => /rel=["']canonical["']/.test(tag));
     const canonical = canonicalTag?.match(/href="([^"]+)"/)?.[1];
-    if (canonical !== expected) throw new Error(\`\${route} incorrect canonical: \${canonical} (expected \${expected})\`);
+    if (canonical !== expected) throw new Error(`${route} incorrect canonical: ${canonical} (expected ${expected})`);
 
     const ogUrlTag = (html.match(/<meta\b[^>]*>/g) ?? [])
       .find((tag) => /property=["']og:url["']/.test(tag));
     const ogUrl = ogUrlTag?.match(/content="([^"]+)"/)?.[1];
-    if (ogUrl !== expected) throw new Error(\`\${route} incorrect og:url: \${ogUrl}\`);
+    if (ogUrl !== expected) throw new Error(`${route} incorrect og:url: ${ogUrl}`);
 
-    if (!/property="og:image"/.test(html)) throw new Error(\`\${route} missing Open Graph image\`);
-    if (!/name="twitter:card"/.test(html)) throw new Error(\`\${route} missing Twitter card\`);
-    if (!/name="description"/.test(html)) throw new Error(\`\${route} missing description\`);
-    if (/name="robots"[^>]*content="[^"]*noindex/i.test(html)) throw new Error(\`\${route} is unexpectedly noindex\`);
+    if (!/property="og:image"/.test(html)) throw new Error(`${route} missing Open Graph image`);
+    if (!/name="twitter:card"/.test(html)) throw new Error(`${route} missing Twitter card`);
+    if (!/name="description"/.test(html)) throw new Error(`${route} missing description`);
+    if (/name="robots"[^>]*content="[^"]*noindex/i.test(html)) throw new Error(`${route} is unexpectedly noindex`);
 
     const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
       .map((match) => JSON.parse(match[1]));
-    if (!ld.some((node) => node["@type"] === "Person")) throw new Error(\`\${route} lacks Person identity markup\`);
+    if (!ld.some((node) => node["@type"] === "Person")) throw new Error(`${route} lacks Person identity markup`);
     if (route === "/" && !ld.some((node) => node["@type"] === "WebSite")) throw new Error("Homepage lacks WebSite name markup");
     if (route === "/about" && !ld.some((node) => node["@type"] === "ProfilePage")) throw new Error("About lacks ProfilePage markup");
-    if (route.startsWith("/projects/") && !ld.some((node) => node["@type"] === "BreadcrumbList")) throw new Error(\`\${route} lacks breadcrumbs\`);
-    console.log(\`PASS SEO \${route} — canonical, OG, Twitter, description, JSON-LD\`);
+    if (route.startsWith("/projects/") && !ld.some((node) => node["@type"] === "BreadcrumbList")) throw new Error(`${route} lacks breadcrumbs`);
+    console.log(`PASS SEO ${route} — canonical, OG, Twitter, description, JSON-LD`);
   }
 
   // Test the legacy hostname without following the redirect away from the CI server.
@@ -106,13 +106,13 @@ try {
     signal: AbortSignal.timeout(8000)
   });
   if (oldHost.status !== 308 || oldHost.headers.get("location") !== "https://ov-orbitnode.dev/about") {
-    throw new Error(\`Expected permanent old-domain redirect to canonical About; got \${oldHost.status}: \${oldHost.headers.get("location")}\`);
+    throw new Error(`Expected permanent old-domain redirect to canonical About; got ${oldHost.status}: ${oldHost.headers.get("location")}`);
   }
   console.log("PASS LEGACY REDIRECT — 308 directly to canonical custom domain");
 
   const shareImage = await fetch(origin + "/opengraph-image", { signal: AbortSignal.timeout(12000) });
   if (shareImage.status !== 200 || !(shareImage.headers.get("content-type") ?? "").includes("image/png")) {
-    throw new Error(\`Open Graph image failed: \${shareImage.status}, \${shareImage.headers.get("content-type")}\`);
+    throw new Error(`Open Graph image failed: ${shareImage.status}, ${shareImage.headers.get("content-type")}`);
   }
   console.log("PASS SOCIAL IMAGE — image/png 1200×630");
 
@@ -124,7 +124,7 @@ try {
   for (const route of routes) {
     const loc = "https://ov-orbitnode.dev" + (route === "/" ? "/" : route);
     if (!sitemapXml.includes("<loc>" + loc + "</loc>")) {
-      throw new Error(\`Sitemap missing canonical \${loc}\`);
+      throw new Error(`Sitemap missing canonical ${loc}`);
     }
   }
   if (sitemapXml.includes("ifeoyewole.vercel.app")) throw new Error("Sitemap lists legacy host");
